@@ -1,7 +1,7 @@
 Scrumizer
 =========
 
-A propos ?
+A propos :
 ----------
 Scrumizer est un outil web de gestion de projet utilisant scrum.
 
