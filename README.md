@@ -31,6 +31,6 @@ Backlog :
 |US18|En tant qu'observateur d'un projet j'aimerai pouvoir editer la priorité des users stories.|1| |Todo|
 |US19|En tant que développeur d'un projet j'aimerai pouvoir editer l'état d'une user story.|2| |Todo|
 |US20|En tant que membre (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir afficher les users stories, les tâches, les builds et les sprints.|1| |Todo|
-|US20|En tant que membre (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5| |Todo|
+|US21|En tant que membre (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5| |Todo|
 
 
