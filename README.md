@@ -8,9 +8,9 @@ Scrimizer est un outil web de gestion de projet.
 Backlog :
 ---------
 
-|ID|Description|Priorité|Coût|Etat|
-|:-:|:---------|:-------:|:---|:----:|
-|US0|En tant qu'utilisateur, j'aimerai pouvoir créer un compte avec mon nom, mon email, mon mot de passe.|1| | |
+|ID |Description|Priorité|Coût|Etat|
+|:-:|:----------|:------:|:---|:---|
+|US0|En tant qu'utilisateur, j'aimerai pouvoir créer un compte avec mon nom, mon email, mon mot de passe.|1|--|To Do|
 |US1|En tant qu'utilisateur je souhaiterai pouvoir m'authentifier avec mon login et mon mot de passe.|1| |To Do|
 |US2|En tant qu'utilisateur je souhaiterai pouvoir me déconnecter.|1||To Do|
 |US3|En tant qu'utilisateur, j'aimerai pouvoir créer un projet en spécifiant le nom et la description.|1| |To Do|
