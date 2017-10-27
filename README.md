@@ -29,7 +29,7 @@ Backlog :
 |US16|En tant que **Développeur**, j'aimerai pouvoir créer un test pour chaque sprint, en spécifiant la version, le type, le résultat, la user story à laquelle il est rataché et le lien de téléchargement du test.|3|1|Todo|
 |US17|En tant que **Project Owner** ou **Développeur**, j'aimerai pouvoir afficher le kanban d'un sprint.|2|1|Todo|
 |US18|En tant que **Project Owner** ou **Développeur**, j'aimerai pouvoir mettre à jour le kanban d'un sprint.|2|1|Todo|
-|US19|En tant que **Product owner**, j'aimerai pouvoir éditer la priorité des users stories à partir du backlog.|1|1|Todo|
-|US20|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
-|US21|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser la documentation du projet.|5|2|Todo|
-|US22|En tant que **Membre**, j'aimerai pouvoir éditer, afficher et supprimer les tâches d'une user story .|1|2|Todo|
+|US19|En tant que **Développeur**, j'aimerai pouvoir éditer, afficher et supprimer les tâches d'une user story .|1|2|Todo|
+|US20|En tant que **Product owner**, j'aimerai pouvoir éditer la priorité des users stories à partir du backlog.|1|1|Todo|
+|US21|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
+|US22|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser la documentation du projet.|5|2|Todo|
