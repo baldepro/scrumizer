@@ -35,6 +35,3 @@ Backlog :
 |US22|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir afficher le backlog, les tâches, les builds et les sprints.|1|2|Todo|
 |US2"|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
 |US24|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser la documentation du projet.|5|2|Todo|
-
-
-
