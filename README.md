@@ -14,6 +14,7 @@ Backlog :
 |US1|En tant qu'**Utilisateur** je souhaiterai pouvoir m'authentifier avec un login et un mot de passe.|1|1|Todo|
 |US2|En tant qu'**Utilisateur** je souhaiterai pouvoir me déconnecter.|1|1|Todo|
 |US3|En tant qu'**Utilisateur**, j'aimerai pouvoir créer un projet en spécifiant le nom et la description.|1|1|Todo|
+<<<<<<< HEAD
 |US4|En tant qu'**Utilisateur**, j'aimerai pouvoir supprimer mes projets.|1|1|Todo|
 |US5|En tant qu'**Utilisateur**, j'aimerai pouvoir visualiser mes projets.|1|1|Todo|
 |US6|En tant que **Project owner**, j'aimerai pouvoir ajouter une personne au projet en spécifiant son nom d'utilisateur et son rôle.|2|1|Todo|
@@ -33,3 +34,4 @@ Backlog :
 |US20|En tant que **Product owner**, j'aimerai pouvoir éditer la priorité des users stories à partir du backlog.|1|1|Todo|
 |US21|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
 |US22|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser la documentation du projet.|5|2|Todo|
+
