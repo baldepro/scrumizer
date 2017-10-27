@@ -33,5 +33,5 @@ Backlog :
 |US20|En tant que **Product owner**, j'aimerai pouvoir valider les users stories, à partir du backlog.|1|1|Todo|
 |US21|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai que l'état d'une user story se met à jour automiquement par rapport à celui de ses tâches associéés.|1|2|Todo|
 |US22|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir afficher le backlog, les tâches, les builds et les sprints.|1|2|Todo|
-|US2"|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
+|US23|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
 |US24|En tant que **Membre** (**Product owner**, **Développeur**, **Product owner**, **Observateur**) d'un projet j'aimerai pouvoir visualiser la documentation du projet.|5|2|Todo|
