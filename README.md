@@ -32,8 +32,8 @@ Backlog :
 |US19|En tant que **Product owner** d'un projet j'aimerai pouvoir editer la priorité des users stories.|1|1|Todo|
 |US20|En tant que **Développeur** d'un projet j'aimerai pouvoir mettre à jour l'état d'une tâche.|2|1|Todo|
 |US21|En tant que **Membre** (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir afficher les users stories, les tâches, les builds et les sprints.|1|2|Todo|
-|US22|En tant que **Membre** (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|5|4|Todo|
-|US23|En tant que **Membre** (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser la documentation du projet.???|5|2|Todo|
+|US22|En tant que **Membre** (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser le Chart Burn Down.|4|4|Todo|
+|US23|En tant que **Membre** (propriétaire, developpeur, observateur) d'un projet j'aimerai pouvoir visualiser la documentation du projet.???|4|2|Todo|
 
 
 
