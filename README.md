@@ -10,11 +10,11 @@ Backlog :
 
 |ID |Description|Priorité|Coût|Etat|
 |:-:|:----------|:------:|:---|:---|
-|US0|En tant qu'**utilisateur**, j'aimerai pouvoir créer un compte avec mon nom, mon email, mon mot de passe.|1|2|Todo|
-|US1|En tant qu'**utilisateur** je souhaiterai pouvoir m'authentifier avec mon login et mon mot de passe.|1|1|Todo|
-|US2|En tant qu'**utilisateur** je souhaiterai pouvoir me déconnecter.|1|1|Todo|
-|US3|En tant qu'**utilisateur**, j'aimerai pouvoir créer un projet en spécifiant le nom et la description.|1|1|Todo|
-|US4|En tant qu'**utilisateur**, j'aimerai pouvoir visualiser mes projets.|1|1|Todo|
+|US0|En tant qu'**Utilisateur**, j'aimerai pouvoir créer un compte avec mon nom, mon email, mon mot de passe.|1|2|Todo|
+|US1|En tant qu'**Utilisateur** je souhaiterai pouvoir m'authentifier avec mon login et mon mot de passe.|1|1|Todo|
+|US2|En tant qu'**Utilisateur** je souhaiterai pouvoir me déconnecter.|1|1|Todo|
+|US3|En tant qu'**Utilisateur**, j'aimerai pouvoir créer un projet en spécifiant le nom et la description.|1|1|Todo|
+|US4|En tant qu'**Utilisateur**, j'aimerai pouvoir visualiser mes projets.|1|1|Todo|
 |US5|En tant que **Project Owner**, j'aimerai pouvoir supprimer un projet,  éditer les propriétés de celui-ci.|1|2|Todo|
 |US6|En tant que **Project Owner**, j'aimerai pouvoir ajouter un **Developpeur**, un **Product Owner** et un **Observateur** en spécifiant le nom et le rôle.|2|1|Todo|
 |US7|En tant que **Project Owner**, j'aimerai pouvoir supprimer un membre (**Developpeur**, **Product owner**, **Obsevateur**), éditer les propriétés de ce dernier.|2|2|Todo|
