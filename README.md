@@ -18,15 +18,22 @@ Backlog :
 |US5|En tant qu'*Utilisateur*, j'aimerai pouvoir visualiser mes projets.|1|1|Todo|
 |US6|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter une personne au projet en spécifiant son nom d'utilisateur et son rôle.|2|1|Todo|
 |US7|En tant que *Membre* d'un projet, j'aimerai pouvoir modifier, supprimer un membre.|2|2|Todo|
+<<<<<<< HEAD
 |US8|En tant que *Membre* d'un projet, j'aimerai pouvoir créer une user story dans le backlog en spécifiant la description, le coût, la priorité.|1|1|Todo|
 |US9|En tant que *Membre* d'un projet, j'aimerai pouvoir mettre à jour l'état d'une user story.|1|2|Todo|
 |US10|En tant que *Développeur*, j'aimerai pouvoir créer un sprint en spécifiant le nom, la durée.|2|1|Todo|
 |US11|En tant que *Développeur*, j'aimerai pouvoir créer une tâche pour une user story en spécifiant la description et le coût.|1|1|Todo|
+=======
+|US8|En tant que *Membre* (*Project Owner*, *Développeur*, *Product Owner*), j'aimerai pouvoir créer / supprimer une user story dans le backlog en spécifiant la description, le coût, la priorité.|1|1|Todo|
+|US9|En tant que *Développeur*, j'aimerai pouvoir mettre à jour l'état d'une user story.|1|2|Todo|
+|US10|En tant que *Développeur*, j'aimerai pouvoir créer/supprimer un sprint en spécifiant le nom, la durée.|2|1|Todo|
+|US11|En tant que *Développeur*, j'aimerai pouvoir créer/supprimer une tâche pour une user story en spécifiant la description et le coût.|1|1|Todo|
+>>>>>>> baldepro
 |US12|En tant que *Développeur*, j'aimerai pouvoir m'assigner une tâche.|2|1|Todo|
 |US13|En tant que *Développeur*, j'aimerai pouvoir ajouter des tâches d'une user story à un sprint.|2|3|Todo|
-|US14|En tant que *Membre* (*Product owner*, *Développeur*, *Product owner*, *Observateur*) d'un projet, j'aimerai pouvoir créer un build à la fin de chaque srpint, en spécifiant la version, la user story à laquelle il est rataché et le lien de téléchargement du build.|3|1|Todo|
+|US14|En tant que *Membre* (*Product owner*, *Développeur*) d'un projet, j'aimerai pouvoir créer un build à la fin de chaque sprint, en spécifiant la version, la user story à laquelle il est rataché et le lien de téléchargement du build.|3|1|Todo|
 |US15|En tant que *Membre* (*Product owner*, *Développeur*, *Product owner*, *Observateur*) d'un projet, j'aimerai pouvoir éditer, afficher et supprimer un build.|3|2|Todo|
-|US16|En tant que *Membre* (*Product owner*, *Développeur*, *Product owner*, *Observateur*) d'un projet, j'aimerai pouvoir créer un test pour chaque sprint, en spécifiant la version, le type, le résultat, la user story à laquelle il est rataché et le lien de téléchargement du test.|3|1|Todo|
+|US16|En tant que *Membre* (*Product owner*, *Développeur*) d'un projet, j'aimerai pouvoir créer un test pour chaque sprint, en spécifiant la version, le type, le résultat, la user story à laquelle il est rataché et le lien de téléchargement du test.|3|1|Todo|
 |US17|En tant que *Membre* (*Product owner*, *Développeur*, *Product owner*, *Observateur*) d'un projet, j'aimerai pouvoir afficher le kanban d'un sprint.|2|1|Todo|
 |US18|En tant que *Développeur*, j'aimerai pouvoir mettre à jour le kanban d'un sprint.|2|1|Todo|
 |US19|En tant que *Développeur*, j'aimerai pouvoir éditer, afficher et supprimer les tâches d'une user story .|1|2|Todo|
