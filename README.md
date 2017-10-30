@@ -16,9 +16,9 @@ Backlog :
 |US3|En tant qu'*Utilisateur*, j'aimerai pouvoir créer un projet en spécifiant le nom et la description.|1|1|Todo|
 |US4|En tant qu'*Utilisateur*, j'aimerai pouvoir supprimer mes projets.|1|1|Todo|
 |US5|En tant qu'*Utilisateur*, j'aimerai pouvoir visualiser mes projets.|1|1|Todo|
-|US6|En tant que *Project owner*, j'aimerai pouvoir ajouter une personne au projet en spécifiant son nom d'utilisateur et son rôle.|2|1|Todo|
-|US7|En tant que *Project owner*, j'aimerai pouvoir modifier, supprimer un membre.|2|2|Todo|
-|US8|En tant que *Membre* (*Project Owner*, *Développeur*, *Product Owner*), j'aimerai pouvoir créer/supprimer une user story dans le backlog en spécifiant la description, le coût, la priorité et l'état.|1|1|Todo|
+|US6|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter une personne au projet en spécifiant son nom d'utilisateur et son rôle.|2|1|Todo|
+|US7|En tant que *Membre* d'un projet, j'aimerai pouvoir modifier, supprimer un membre.|2|2|Todo|
+|US8|En tant que *Membre* (*Project Owner*, *Développeur*, *Product Owner*), j'aimerai pouvoir créer / supprimer une user story dans le backlog en spécifiant la description, le coût, la priorité.|1|1|Todo|
 |US9|En tant que *Développeur*, j'aimerai pouvoir mettre à jour l'état d'une user story.|1|2|Todo|
 |US10|En tant que *Développeur*, j'aimerai pouvoir créer/supprimer un sprint en spécifiant le nom, la durée.|2|1|Todo|
 |US11|En tant que *Développeur*, j'aimerai pouvoir créer/supprimer une tâche pour une user story en spécifiant la description et le coût.|1|1|Todo|
