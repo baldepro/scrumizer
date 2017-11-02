@@ -33,4 +33,4 @@ Backlog :
 |US20|En tant que *Membre* d'un projet, j'aimerai pouvoir éditer, supprimer un build.|3|2|Todo|
 |US21|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter un test E2E pour une user story et specifier le lien de téléchargement du test.|3|1|Todo|
 |US22|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter une documentation pour une user story et specifier le lien de téléchargement de la documentation.|3|1|Todo|
-|US23|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter le code source pour un ( user story ou tache ??) et specifier le lien de telechargement du code.|3|1|Todo|
+|US23|En tant que *Membre* d'un projet, j'aimerai pouvoir ajouter le code source d'une tâche déjà réalisée et specifier le lien de téléchargement du code.|3|1|Todo|
