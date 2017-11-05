@@ -1,11 +1,10 @@
 ﻿Scrumizer
 =========
 
-
 A propos :
 ----------
-Scrumizer est une application web de gestion de projet utilisant scrum.
 
+Scrumizer est une application web de gestion de projet utilisant scrum.
 
 Backlog :
 ---------
