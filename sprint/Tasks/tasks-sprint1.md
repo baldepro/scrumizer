@@ -12,7 +12,7 @@ Sprint 1 : ce sprint dure 2 semaines et commence le 06/11/2017
 
 |ID |Description|affecté|Etat|
 |:-:|:----------|:---|:---|
-|#T1|Générer un projet node js appelé "scrumizer" avec le framework express js |No one|Todo|
+|#T1|Générer un projet node js appelé "scrumizer" avec le framework express js |baldepro|Done|
 |#T2|Créer un formulaire HTML5 appelé "create_project.html" dans le répertoire "views/" avec les labels "Project Name" et "Description" et les champs "projectname" et "description" et un bouton de type submit appelé "submit" |No one|Todo|
 |#T3|Créer un formulaire HTML5 appelé "create_user.html" dans le répertoire "views/" avec les labels "Name", "Mail" et les champs "name" et "mail" et un bouton de type submit appelé "submit" |No one|Todo|
 |#T4|Créer un formulaire HTML5 appelé "create_user_story.html" dans le répertoire "views/" avec les labels "Description", "Priority", "Cost" et "State" et les champs "description", "priority", "cost" et "state" et un bouton de type submit appelé "submit" |No one|Todo|
