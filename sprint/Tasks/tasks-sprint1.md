@@ -13,9 +13,9 @@ Sprint 1 : ce sprint dure 2 semaines et commence le 06/11/2017
 |ID |Description|affecté|Etat|
 |:-:|:----------|:---|:---|
 |#T1|Générer un projet node js appelé "scrumizer" avec le framework express js |baldepro|Done|
-|#T2|Créer un formulaire HTML5 appelé "create_project.html" dans le répertoire "views/" avec les labels "Project Name" et "Description" et les champs "projectname" et "description" et un bouton de type submit appelé "submit" |No one|Todo|
-|#T3|Créer un formulaire HTML5 appelé "create_user.html" dans le répertoire "views/" avec les labels "Name", "Mail" et les champs "name" et "mail" et un bouton de type submit appelé "submit" |No one|Todo|
-|#T4|Créer un formulaire HTML5 appelé "create_user_story.html" dans le répertoire "views/" avec les labels "Description", "Priority", "Cost" et "State" et les champs "description", "priority", "cost" et "state" et un bouton de type submit appelé "submit" |No one|Todo|
+|#T2|Créer un formulaire HTML5 dans un fichier nommé "create_project.html" dans le répertoire "views/" avec les labels "Project Name" et "Description" et les champs "projectname" et "description" et un bouton de type submit appelé "submit" |No one|Todo|
+|#T3|Créer un formulaire HTML5 dans un fichier nommé "create_user.html" dans le répertoire "views/" avec les labels "Name", "Mail" et les champs "name" et "mail" et un bouton de type submit appelé "submit" |No one|Todo|
+|#T4|Créer un formulaire HTML5 dans un fichier nommé "create_user_story.html" dans le répertoire "views/" avec les labels "Description", "Priority", "Cost" et "State" et les champs "description", "priority", "cost" et "state" et un bouton de type submit appelé "submit" |No one|Todo|
 |#T5|Mettre du style à ces formulaires avec Bootstrap 3.0 puis créer un fichier "style.css" dans le répertoire "public/stylesheets/" pour personnaliser cette mise en forme|No one|Todo|
 |#T6|Dans le fichier "routes/index.js" ajouter les route "/project", "/user" et "/userStory" en mode POST. *Exemple* : "*router.post('/createProject', function(req, res, next ){...});*"|No one|Todo|
 |#T7|Créer un fichier appelé "controllers.js" dans le répertoire "public/javascripts" puis ajouter les controllers nommé respectivement "createProjectController", "createUserController" et "createUSController" pour les modules création de création de projet, de user et de user_story en faisant comme suit : "*var app = angular.module('App',[]); app.controller('createProjectController', function($scope, $http){...});*"|No one|Todo|
