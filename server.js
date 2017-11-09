@@ -6,8 +6,8 @@ var PORT = process.env.PORT || 3000
 
 Routes(app)
 
-app.all('/*', function(req, res) {
-    res.send('\
+app.all('/*', function (req, res) {
+  res.send('\
     <!DOCTYPE html> \
     <html> \
     <head>\
@@ -21,6 +21,6 @@ app.all('/*', function(req, res) {
         </html>')
 })
 
-app.listen(PORT, function() {
-    console.log('server is running on port ' + PORT)
+app.listen(PORT, function () {
+  console.log('server is running on port ' + PORT)
 })
