@@ -41,7 +41,7 @@ jspm_packages/
 .env
 
 # VSCODE
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
