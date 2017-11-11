@@ -17,7 +17,7 @@ projectController.controller('projectController', function ($scope, $http) {
     });
   }
 
-  $http.get('/project/list')
+  $http.get('/project/:user_id')
   .success((data) => {
     $scope.projects.push(data);
   })
@@ -25,7 +25,7 @@ projectController.controller('projectController', function ($scope, $http) {
     console.log(error);
   });
 
-  $http.get('/project/:id')
+  $http.get('/project/:user_id')
   .success((data) => {
     $scope.OneProject.push(data);
   })
