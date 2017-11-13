@@ -1,53 +1,27 @@
-var projectController = angular.module('projectController',[]);
+var projectController = angular.module('projectController',[])
+import projectService  from  './services'
 
-projectController.controller('projectController', function ($scope, $http) {
-  $scope.projects   = {};
-  $scope.oneProject = {};
-   $scope.submit    = function(){
+projectController.controller('projectController', function ($scope, projectService) {
+  $scope.submit     = function(){
     var data = { name        : $scope.name,
-                 description : $scope.description,
-                 user_id     : $scope.user_id
+                 depot       : $scope.repository,
+                 description : $scope.description
     }
-    $http.post('/project/create', data)
-    .success((data) => {
-      console.log(data);
-    })
-    .error((error) => {
-      console.log(error);
-    });
+    return  projectService.create_project(data)
+  }
+  $scope.projects  = projectService.get_all_project_from_user()
+
+  $scope.project   = projectService.get_one_project_from_user()
+
+  $scope.update    = function(){
+    var data = { name        : $scope.name,
+                 depot       : $scope.repository,
+                 description : $scope.description
+    }
+    return projectService.update_project(data)
   }
 
-  $http.get('/project/:user_id')
-  .success((data) => {
-    $scope.projects.push(data);
-  })
-  .error((error) => {
-    console.log(error);
-  });
-
-  $http.get('/project/:user_id')
-  .success((data) => {
-    $scope.OneProject.push(data);
-  })
-  .error((error) => {
-    console.log(error);
-  });
-
-  $http.put('/project/:id',$scope.new_name)
-  .success((data) => {
-    console.log(data);
-  })
-  .error((error) => {
-    console.log(error);
-  });
-
-  $http.delete('/project/:id')
-  .success((data) => {
-    console.log(data);
-  })
-  .error((error) => {
-    console.log(error);
-  });
-
-  $scope.msg = 'This is a simple test for the projects page controller'
-};
+  $scope.delete_project = projectService.delete_project()
+  //$scope.msg = 'This is a simple test for the projects page controller'
+}
+module.export = projectController

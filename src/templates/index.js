@@ -3,6 +3,8 @@ import homeController from './templates/home/home'
 import projectController from './templates/project/project'
 import uiRouter from 'angular-ui-router'
 
+angular.bootstrap(document, [appModule.name])
+
 const app = angular.module('app', [uiRouter])
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
@@ -25,5 +27,3 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
     requireBase: false
   })
 })
-
-export default app
