@@ -35,5 +35,12 @@ installModules([
   'html-loader',
   'eslint-loader',
   'body-parser',
-  'standard-loader'
+  'standard-loader',
+  'clean-webpack-plugin',
+  'css-loader',
+  'style-loader',
+  'postcss-loader',
+  'file-loader',
+  'uglifyjs-webpack-plugin',
+  'extract-text-webpack-plugin'
 ])

@@ -1,11 +1,28 @@
 const path = require('path')
 const webpack = require('webpack')
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CleanPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const dev = process.env.NODE_ENV === 'dev'
 
-// Defines common properties of js files loaders
-// let jsLoader = {
-//   test: /\.js$/,
-//   exclude: /node_modules/
-// }
+let cssLoaders = [{
+  loader: 'css-loader',
+  options: {importLoaders: 1, minimize: !dev}
+}]
+
+if (!dev) {
+  cssLoaders.push({
+    loader: 'postcss-loader',
+    options: {
+      sourceMap: true,
+      plugins: (loaders) => {
+        require('auto-prefixer')({
+          browsers: ['last 2 versions', 'safari > 7, ie > 8']
+        })
+      }
+    }
+  })
+}
 
 let config = {
   entry: [
@@ -14,7 +31,7 @@ let config = {
     './src/index.js'
   ],
 
-  devtool: 'cheap-module-eval-source-map',
+  devtool: dev ? 'cheap-module-eval-source-map' : 'source-map',
 
   module: {
     rules: [
@@ -23,14 +40,9 @@ let config = {
         test: /\.jsx?$/,
         loader: 'standard-loader',
         exclude: /(node_modules|bower_components)/,
-        options: {
-          error: false,
-          snazzy: true,
-          parser: 'babel-eslint'
-        }
+        options: { error: false, snazzy: true, parser: 'babel-eslint' }
       },
       {
-        // ...jsLoader,
         test: /\.js$/,
         exclude: /node_modules/,
         use: ['babel-loader']
@@ -38,6 +50,21 @@ let config = {
       {
         test: /\.html$/,
         use: ['html-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: cssLoaders
+        })
+      },
+      {
+        test: /\.(png|jpeg|svg|gif)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.(ttf|woff|woff2|eot|otf)$/,
+        use: ['file-loader']
       }
     ]
   },
@@ -58,6 +85,19 @@ let config = {
     filename: 'app.bundle.js',
     path: path.resolve(__dirname, 'public')
   }
+}
+
+if (!dev) {
+  // config.plugins.push(new UglifyJSPlugin({ sourceMap: true }))
+  config.plugins.push(
+      new CleanPlugin(['public'], {
+        root: path.resolve('./'),
+        verbose: true,
+        dry: true
+      })
+  )
+} else {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 module.exports = config

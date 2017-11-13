@@ -1,6 +1,6 @@
 import angular from 'angular'
-import homeController from './templates/home/home'
-import projectController from './templates/project/project'
+import homeCtrl from './templates/home/homeCtrl'
+import projectCtrl from './templates/project/projectCtrl'
 import uiRouter from 'angular-ui-router'
 
 const app = angular.module('app', [uiRouter])
@@ -12,12 +12,12 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
         .state('home', {
           url: '/',
           template: require('./templates/home/home.html'),
-          controller: homeController
+          controller: homeCtrl
         })
         .state('project', {
           url: '/project',
           template: require('./templates/project/project.html'),
-          controller: projectController
+          controller: projectCtrl
         })
 
   $locationProvider.html5Mode({
