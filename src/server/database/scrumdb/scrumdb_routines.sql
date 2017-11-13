@@ -41,6 +41,17 @@ WHERE project.id = project_id AND user_has_project.user_id = user_id$$
 --
 -- Functions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `create_user_story`(`id` INT, `description` VARCHAR(500)
+, `priority` enum('high','low','medium'), `points` INT , 'status' enum('done','todo','work_in_progress') 
+, 'project_id' INT; 'e2e_test_id' INT); 
+		       RETURNS int(10) unsigned
+    MODIFIES SQL DATA
+BEGIN
+	INSERT INTO `user_story` (`description`, `priority`, `points`, `status`, `project_id, `e2e_test_id`) VALUES (`description`, `priority`, `points`, `status`, `project_id, `e2e_test_id`);
+
+    RETURN (ROW_COUNT() & 1);
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `create_project`(`user_id` INT, `name` VARCHAR(20), `git_url` VARCHAR(255), `description` VARCHAR(2000)) RETURNS int(10) unsigned
     MODIFIES SQL DATA
 BEGIN
