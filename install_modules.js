@@ -28,6 +28,7 @@ installModules([
   'webpack-dev-server',
   'babel-loader',
   'babel-core',
+  'babel-eslint',
   'babel-preset-env',
   'angular',
   'angular-ui-router',
@@ -35,5 +36,6 @@ installModules([
   'html-loader',
   'eslint-loader',
   'body-parser',
+  'standard',
   'standard-loader'
 ])
