@@ -1,4 +1,9 @@
-export default function ($scope) {
+var homeController = angular.module('homeController',[])
+//import projectService  from  './services'
+
+homeController.controller('homeController', function ($scope, $http) {
   $scope.msg = 'This is a simple test for the home page controller'
 }
-console.log('toto')
+/*export default function ($scope) {
+  $scope.msg = 'This is a simple test for the home page controller'
+}*/

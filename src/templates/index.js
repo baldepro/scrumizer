@@ -1,6 +1,6 @@
 import angular from 'angular'
-import homeController from './templates/home/home'
-import projectController from './templates/project/project'
+import homeController from './home/home'
+import projectController from './project/project'
 import uiRouter from 'angular-ui-router'
 
 angular.bootstrap(document, [appModule.name])
@@ -13,12 +13,12 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
   $stateProvider
         .state('home', {
           url: '/',
-          template: require('./templates/home/home.html'),
+          template: require('./home/home.html'),
           controller: homeController
         })
         .state('project', {
           url: '/project',
-          template: require('./templates/project/project.html'),
+          template: require('./project/project.html'),
           controller: projectController
         })
 

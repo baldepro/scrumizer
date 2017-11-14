@@ -24,4 +24,4 @@ projectController.controller('projectController', function ($scope, projectServi
   $scope.delete_project = projectService.delete_project()
   //$scope.msg = 'This is a simple test for the projects page controller'
 }
-module.export = projectController
+module.exports = projectController
