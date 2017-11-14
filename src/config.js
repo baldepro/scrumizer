@@ -1,9 +1,10 @@
 import angular from 'angular'
-import homeCtrl from './templates/home/homeCtrl'
+import homeCtrl from './templates/home/home-ctrl'
+import homeFactory from './templates/home/home-factory'
 import projectCtrl from './templates/project/projectCtrl'
 import uiRouter from 'angular-ui-router'
 
-const app = angular.module('app', [uiRouter])
+const app = angular.module('app', [uiRouter, homeFactory.name])
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
   $urlRouterProvider.otherwise('/')

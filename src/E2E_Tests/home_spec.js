@@ -21,19 +21,15 @@ describe('To test the home page', function () {
     var signUpPage = require('./pages/home/sign-up-page')
     it('should fill up the form and click the submit button', function () {
       homePage.clickBtn('sign-up-btn')
-      browser.driver.sleep(time)
       signUpPage.enterFieldName(name)
       .then(function () {
         signUpPage.enterFieldEmail(email)
-        browser.driver.sleep(time)
       })
       .then(function () {
         signUpPage.enterFieldPassWord(password)
-        browser.driver.sleep(time)
       })
       .then(function () {
         signUpPage.clickSubmit()
-        browser.driver.sleep(time)
       })
     })
   })
@@ -44,15 +40,12 @@ describe('To test the home page', function () {
 
     it('should stay to the login page after wrong given information', function () {
       homePage.clickBtn('login-btn')
-      browser.driver.sleep(time)
       loginPage.enterFieldName(wrongName)
       .then(function () {
         loginPage.enterFieldPassword(wrongPassword)
-        browser.driver.sleep(time)
       })
       .then(function () {
         loginPage.clickSubmit()
-        browser.driver.sleep(time)
       })
     })
 
@@ -60,11 +53,9 @@ describe('To test the home page', function () {
       loginPage.enterFieldName('')
       .then(function () {
         loginPage.enterFieldPassword(wrongPassword)
-        browser.driver.sleep(time)
       })
       .then(function () {
         loginPage.clickSubmit()
-        browser.driver.sleep(time)
       })
     })
 
@@ -72,11 +63,9 @@ describe('To test the home page', function () {
       loginPage.enterFieldName(name)
       .then(function () {
         loginPage.enterFieldPassword(password)
-        browser.driver.sleep(time)
       })
       .then(function () {
         loginPage.clickSubmit()
-        browser.driver.sleep(time)
       })
     })
   })
@@ -87,14 +76,14 @@ describe('To test the home page', function () {
 
     // Test the content of the projects page
     it('should contain a button and a table', function () {
+      expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
       expect(projectPage.isPresent('create-project-btn')).toBe(true)
     })
 
     // Create project button
     it('should move to the project creation page', function () {
       projectPage.clickBtn()
-      browser.driver.sleep(time)
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/create-project.html')
+      // expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
     })
 
     // Project creation page
@@ -105,12 +94,10 @@ describe('To test the home page', function () {
         createProjectPage.enterFieldName('project 1')
         .then(function () {
           createProjectPage.enterFieldDescription('this is my first project')
-          browser.driver.sleep(time)
         })
         .then(function () {
           createProjectPage.clickSubmit()
-          browser.driver.sleep(3000)
-          expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project.html')
+          // expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
         })
       })
     })

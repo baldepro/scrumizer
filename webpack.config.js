@@ -1,3 +1,4 @@
+const bootstrapEntryPoints = require('./webpack.bootstrap.config')
 const path = require('path')
 const webpack = require('webpack')
 // const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
@@ -28,6 +29,7 @@ let config = {
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:8080',
     'webpack/hot/only-dev-server',
+    'bootstrap-loader',
     './src/index.js'
   ],
 
@@ -53,19 +55,19 @@ let config = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: cssLoaders
-        })
+        use: ['style-loader', 'css-loader']
+        // use: ExtractTextPlugin.extract({
+        //   fallback: 'style-loader',
+        //   use: cssLoaders
+        // })
       },
       {
-        test: /\.(png|jpeg|svg|gif)$/,
+        test: /\.(png|jpeg|gif)$/,
         use: ['file-loader']
       },
-      {
-        test: /\.(ttf|woff|woff2|eot|otf)$/,
-        use: ['file-loader']
-      }
+      { test: /\.(woff2?|svg)$/, loader: 'url-loader?limit=10000' },
+      { test: /\.(ttf|eot)$/, loader: 'file-loader' },
+      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports-loader?jQuery=jquery' }
     ]
   },
 

@@ -42,5 +42,11 @@ installModules([
   'postcss-loader',
   'file-loader',
   'uglifyjs-webpack-plugin',
-  'extract-text-webpack-plugin'
+  'extract-text-webpack-plugin',
+  'bootstrap-sass',
+  'bootstrap-loader',
+  'resolve-url-loader',
+  'imports-loader',
+  'node-sass',
+  'sass-loader'
 ])
