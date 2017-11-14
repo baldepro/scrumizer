@@ -28,6 +28,7 @@ installModules([
   'webpack-dev-server',
   'babel-loader',
   'babel-core',
+  'babel-eslint',
   'babel-preset-env',
   'angular',
   'angular-ui-router',
@@ -49,4 +50,5 @@ installModules([
   'imports-loader',
   'node-sass',
   'sass-loader'
+r
 ])
