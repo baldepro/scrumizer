@@ -1,5 +1,49 @@
-<div>
-    <a ui-sref="home">Home</a>
-    <h1>Welcome to the projects page of scrumizer</h1>
-    <h2>{{msg}}</h2>
+<div class="container">
+    <a ui-sref="home">Log out</a>
+
+    <a ng-click="clickCreateProjectBtn()" class="btn btn-primary a-btn-slide-text create-project-btn">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span><strong>Add</strong></span>            
+    </a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Decription</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="project in projects">
+                <td>{{project.name}}</td>
+                <td>{{project.description}}</td>
+                <td>
+                    <a href="#" class="btn btn-primary a-btn-slide-text">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        <span><strong>Edit</strong></span>            
+                    </a>
+                    <a href="#" class="btn btn-primary a-btn-slide-text">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span><strong>Delete</strong></span>            
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="create-project-form" class="modal">
+        <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
+        <form class="modal-content animate" novalidate>
+            <div class="container form-content">
+                <input type="text" placeholder="Enter project name" ng-model="name" required>
+                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="description"></textarea>
+                <input type="text" placeholder="Enter git repository" ng-model="gitRepository" required>
+                
+                <button class="btn btn-primary submit-btn" ng-click="create()">Submit</button>
+                <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
+            </div>
+        </form>
+    </div>
+    
 </div>
