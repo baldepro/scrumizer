@@ -36,6 +36,19 @@ installModules([
   'html-loader',
   'eslint-loader',
   'body-parser',
-  'standard',
-  'standard-loader'
+  'standard-loader',
+  'clean-webpack-plugin',
+  'css-loader',
+  'style-loader',
+  'postcss-loader',
+  'file-loader',
+  'uglifyjs-webpack-plugin',
+  'extract-text-webpack-plugin',
+  'bootstrap-sass',
+  'bootstrap-loader',
+  'resolve-url-loader',
+  'imports-loader',
+  'node-sass',
+  'sass-loader'
+r
 ])
