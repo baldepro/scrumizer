@@ -1,5 +1,5 @@
 import angular from 'angular'
 import appModule from './config'
-import css from './templates/css/style.css'
+import css from './css/style.css'
 
 angular.bootstrap(document, [appModule.name])
