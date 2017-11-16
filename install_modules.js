@@ -50,5 +50,4 @@ installModules([
   'imports-loader',
   'node-sass',
   'sass-loader'
-r
 ])

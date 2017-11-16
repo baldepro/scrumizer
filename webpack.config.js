@@ -1,6 +1,9 @@
+const bootstrapEntryPoints = require('./webpack.bootstrap.config')
 const path = require('path')
 const webpack = require('webpack')
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const dev = process.env.NODE_ENV === 'dev'
 
 let cssLoaders = [{
@@ -27,7 +30,7 @@ let config = {
     'webpack-dev-server/client?http://127.0.0.1:8080',
     'webpack/hot/only-dev-server',
     'bootstrap-loader',
-    './src/index.js'
+    './src/templates/index.js'
   ],
 
   devtool: dev ? 'cheap-module-eval-source-map' : 'source-map',
