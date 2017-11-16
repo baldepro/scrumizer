@@ -17,10 +17,18 @@
         <tbody>
             <tr ng-repeat="project in projects">
                 <td>
-                    <a ng-if='!project.isEditing' ui-sref="">{{project.name}}</a>
+                    <a ng-if='!project.isEditing'>{{project.name}}</a>
                     <form ng-submit="updateProject(project)">
                         <input ng-value="project.name" ng-if="project.isEditing" 
                                 ng-model="project.updatedName" 
+                                class="form-control project-update-input"/>
+                    </form>
+                </td>
+                <td>
+                    <a ng-if='!project.isEditing'>{{project.git}}</a>
+                    <form ng-submit="updateProject(project)">
+                        <input ng-value="project.git" ng-if="project.isEditing" 
+                                ng-model="project.updatedGit" 
                                 class="form-control project-update-input"/>
                     </form>
                 </td>
@@ -60,13 +68,13 @@
         </tbody>
     </table>
 
-    <div id="create-project-form" class="modal">
+    <div ng-if="createProjectBtnActivated" id="create-project-form" class="modal">
         <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
         <form class="modal-content animate" novalidate>
             <div class="container form-content">
-                <input type="text" placeholder="Enter project name" ng-model="name" required>
-                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="description"></textarea>
-                <input type="text" placeholder="Enter git repository" ng-model="gitRepository" required>
+                <input type="text" placeholder="Enter project name" ng-model="project.name" required>
+                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="project.description"></textarea>
+                <input type="text" placeholder="Enter git repository" ng-model="project.git" required>
                 
                 <button class="btn btn-primary submit-btn" ng-click="create()">Submit</button>
                 <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
