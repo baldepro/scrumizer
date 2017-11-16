@@ -26,7 +26,8 @@ CREATE TABLE `project` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(20) NOT NULL,
   `git_url` varchar(255) NOT NULL,
-  `description` varchar(2000) DEFAULT NULL
+  `description` varchar(2000) DEFAULT NULL,
+  `creator_id` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `sprint`;
