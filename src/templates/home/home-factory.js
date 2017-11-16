@@ -1,49 +1,37 @@
 import angular from 'angular'
 
-const homeFactory = angular.module('app.homeFactory', [])
+const homeServices = angular.module('app.homeFactory', [])
 
-.factory('homeFactory', ['$http', '$location', function ($http, $location) {
-  function init ($scope) {
-    $scope.name = ''
-    $scope.email = ''
-    $scope.password = ''
-    $scope.passwordReapet = ''
-    $scope.isUserValid = false
-  }
-  // Indicates if a user can login with the given data
-  function canUserLogIn ($scope, username) {
-    $http({ method: 'GET', url: '/home/login'})
-    .then(function (response) {
-      $scope.isUserValid = (response.data.password === $scope.password) && (response.data.name === $scope.name)
-      if ($scope.isUserValid) {
-        $location.path('/project')
-      } else {
-        init($scope)
-      }
-    })
-  }
-
-  function createUserAccount ($scope) {
+.service('signUpService', ['$http', '$location', function ($http, $location) {
+  return function ($scope) {
     $http({
       method: 'POST',
       url: '/home/sign-up',
-      data: { name: $scope.name, email: $scope.email, password: $scope.password }
-    }).then(function (response) {
-      console.log('Data have been sent')
-      init($scope)
-      // TODO
-    }).then(function (response) {
-      // TODO
+      data: { name: $scope.user.name, email: $scope.user.email, password: $scope.user.password }
+    }).then((response) => {
     })
   }
+}]
+)
 
-  return {
-    canUserLogIn,
-    createUserAccount
+.service('loginService', ['$http', '$location', function ($http, $location) {
+  return function ($scope) {
+    $http({
+      method: 'POST',
+      url: '/home/login',
+      data: { name: $scope.user.name }
+    })
+    .then((response) => {
+      let val = response.data
+      console.log(val)
+      if (val[0].length !== 0 && (val[0].password === $scope.user.password) && (val[0].name === $scope.user.name)) {
+        $scope.isUserValid = true
+        $location.path('/project/' + $scope.user.name)
+      } else {
+        console.log('----->No such user ' + $scope.name)
+      }
+    })
   }
 }])
 
-.factory('signUpFactory', function ($http) {
-})
-
-export default homeFactory
+export default homeServices

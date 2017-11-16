@@ -10,35 +10,71 @@
         <thead>
             <tr>
                 <th scope="col">Name</th>
-                <th scope="col">Decription</th>
+                <th scope="col">Description</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="project in projects">
-                <td>{{project.name}}</td>
-                <td>{{project.description}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary a-btn-slide-text">
+                    <a ng-if='!project.isEditing'>{{project.name}}</a>
+                    <form ng-submit="updateProject(project)">
+                        <input ng-value="project.name" ng-if="project.isEditing" 
+                                ng-model="project.updatedName" 
+                                class="form-control project-update-input"/>
+                    </form>
+                </td>
+                <td>
+                    <a ng-if='!project.isEditing'>{{project.git}}</a>
+                    <form ng-submit="updateProject(project)">
+                        <input ng-value="project.git" ng-if="project.isEditing" 
+                                ng-model="project.updatedGit" 
+                                class="form-control project-update-input"/>
+                    </form>
+                </td>
+                <td>
+                    <span ng-if="!project.isEditing">{{project.description}}</span>
+                    <form ng-submit="updateProject(project)">
+                        <input ng-value="project.description" ng-if="project.isEditing" 
+                                ng-model="project.updatedDesc" 
+                                class="form-control project-update-input"/>
+                    </form>
+                </td>
+                <td>
+                    <a ng-if="!project.isEditing" ng-click="onEditClick(project)"
+                        class="btn btn-primary a-btn-slide-text edit-project-btn" >
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         <span><strong>Edit</strong></span>            
                     </a>
-                    <a href="#" class="btn btn-primary a-btn-slide-text">
+                    <a ng-if="!project.isEditing" ng-click="deleteProject(project)"
+                         class="btn btn-primary a-btn-slide-text delete-project-btn">
                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         <span><strong>Delete</strong></span>            
                     </a>
+
+                    <a ng-if="project.isEditing" href="#" 
+                        class="btn btn-primary a-btn-slide-text save-update-project-btn" 
+                        ng-click="upadteProject(project)">
+                            <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
+                            <span><strong>Save</strong></span>            
+                        </a>
+                        <a ng-if="project.isEditing"  ng-click="onCancelClick(project)" 
+                            class="btn btn-default a-btn-slide-text cancel-update-project-btn">
+                            <span class="glyphicon glyphicon-cancel" aria-hidden="true"></span>
+                            <span><strong>Cancel</strong></span>            
+                        </a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <div id="create-project-form" class="modal">
+    <div ng-if="createProjectBtnActivated" id="create-project-form" class="modal">
         <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
         <form class="modal-content animate" novalidate>
             <div class="container form-content">
-                <input type="text" placeholder="Enter project name" ng-model="name" required>
-                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="description"></textarea>
-                <input type="text" placeholder="Enter git repository" ng-model="gitRepository" required>
+                <input type="text" placeholder="Enter project name" ng-model="project.name" required>
+                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="project.description"></textarea>
+                <input type="text" placeholder="Enter git repository" ng-model="project.git" required>
                 
                 <button class="btn btn-primary submit-btn" ng-click="create()">Submit</button>
                 <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>

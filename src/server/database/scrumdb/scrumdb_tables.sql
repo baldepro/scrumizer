@@ -5,7 +5,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-
+USE scrumdb;
 DROP TABLE IF EXISTS `build`;
 CREATE TABLE `build` (
   `id` int(10) UNSIGNED NOT NULL,
@@ -50,7 +50,9 @@ CREATE TABLE `task` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(20) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NnameULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `user_has_project`;

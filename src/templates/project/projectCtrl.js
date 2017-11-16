@@ -1,37 +1,77 @@
-export default function ($scope) {
-  var createProjectForm = document.getElementById('create-project-form')
-  $scope.projects = [{
-    name: 'project 1',
-    description: 'My first project'
-  }
-  ]
+import _ from 'lodash'
+import angular from 'angular'
 
-  $scope.name = ''
-  $scope.description = ''
-  $scope.gitRepository = ''
+var projectCtrlModule = angular.module('homeCtrlModule', [])
 
-  $scope.clickCreateProjectBtn = function () {
-    // Get the modal
-    createProjectForm.style.display = 'block'
-    createProjectForm.style.width = 'auto'
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target === createProjectForm) {
-        createProjectForm.style.display = 'none'
+.controller('projectCtrl',
+  ['$scope', 'createProjectService', 'getProjectsService', 'deleteProjectService', 'updateProjectService',
+    function ($scope, createProjectService, getProjectsService, deleteProjectService, updateProjectService) {
+      $scope.projects = []
+
+      getProjectsService($scope)
+
+      $scope.project = {
+        name: '',
+        description: '',
+        git: '',
+        init: function () {
+          this.name = ' '
+          this.description = ' '
+          this.git = ' '
+        }
       }
-    }
-  }
 
-  $scope.clickCancelBtn = function () {
-    createProjectForm.style.display = 'none'
-  }
+      $scope.createProjectBtnActivated = false
 
-  $scope.create = function () {
-    $scope.projects.push({
-      name: $scope.name,
-      description: $scope.description,
-      gitRepository: $scope.gitRepository
-    })
-    createProjectForm.style.display = 'none'
-  }
-}
+      $scope.clickCreateProjectBtn = function () {
+        $scope.createProjectBtnActivated = true
+      }
+
+      $scope.clickCancelBtn = function () {
+        $scope.createProjectBtnActivated = false
+      }
+
+      $scope.create = function () {
+        createProjectService($scope)
+        $scope.createProjectBtnActivated = false
+      }
+
+      $scope.onEditClick = project => {
+        project.isEditing = true
+      }
+
+      $scope.onCancelClick = project => {
+        project.isEditing = false
+      }
+
+      $scope.upadteProject = project => {
+        project.isEditing = false
+
+        if (project.updatedName !== undefined) project.name = project.updatedName
+        if (project.updatedDesc !== undefined) project.description = project.updatedDesc
+        if (project.updatedGit !== undefined) project.git = project.updatedGit
+
+        $scope.project.name = project.name
+        $scope.project.description = project.description
+        $scope.project.git = project.git
+
+        updateProjectService($scope)
+      }
+
+      $scope.deleteProject = projectToDelete => {
+        $scope.project.name = projectToDelete.name
+        $scope.project.description = projectToDelete.description
+        $scope.project.git = projectToDelete.git
+
+        deleteProjectService($scope)
+
+        _.remove($scope.projects, project => (
+      project.name === projectToDelete.name &&
+      project.description === projectToDelete.description &&
+      project.git === projectToDelete.git
+    )
+  )
+      }
+    }])
+
+export default projectCtrlModule

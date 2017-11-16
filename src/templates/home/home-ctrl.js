@@ -1,54 +1,55 @@
 
-export default function ($scope, homeFactory) {
-  var signUpForm = document.getElementById('sign-up-form')
-  var loginForm = document.getElementById('login-form')
+import angular from 'angular'
 
-  $scope.isUserValid = false
-  function init () {
-    $scope.name = ''
-    $scope.email = ''
-    $scope.password = ''
-    $scope.passwordReapet = ''
-    $scope.isUserValid = false
-  }
+var homeModule = angular.module('homeModule', [])
 
-  $scope.clickSignUp = function () {
-    // Get the modal
-    signUpForm.style.display = 'block'
-    signUpForm.style.width = 'auto'
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target === signUpForm) {
-        signUpForm.style.display = 'none'
+homeModule.controller('homeCtrl',
+  ['$scope', 'signUpService', 'loginService',
+    function ($scope, signUpService, loginService) {
+      $scope.signUpBtnActivated = false
+      $scope.loginBtnActivated = false
+
+      $scope.user = {
+        name: '',
+        email: '',
+        password: '',
+        passwordBis: '',
+        init: function () {
+          this.name = ''
+          this.email = ''
+          this.password = ''
+          this.passwordBis = ''
+        }
+      }
+
+      $scope.clickSignUp = function () {
+        $scope.signUpBtnActivated = true
+      }
+
+      $scope.clickCancelBtn = function () {
+        $scope.signUpBtnActivated = false
+        $scope.loginBtnActivated = false
+        $scope.user.init()
+      }
+
+      $scope.submitSignUpData = function () {
+        $scope.signUpBtnActivated = false
+        signUpService($scope)
+        $scope.user.init()
+      }
+
+      $scope.clickLogin = function () {
+        $scope.loginBtnActivated = true
+      }
+
+      $scope.submitLoginData = function () {
+        $scope.loginBtnActivated = false
+        console.log($scope.user.name)
+        console.log($scope.user.email)
+        console.log($scope.user.password)
+        loginService($scope)
       }
     }
-  }
+  ])
 
-  $scope.clickCancelBtn = function () {
-    init()
-    signUpForm.style.display = 'none'
-    loginForm.style.display = 'none'
-  }
-
-  $scope.submitSignUpData = function () {
-    signUpForm.style.display = 'none'
-    homeFactory.createUserAccount($scope)
-  }
-
-  $scope.clickLogin = function () {
-    // Get the modal
-    loginForm.style.display = 'block'
-    loginForm.style.width = 'auto'
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target === loginForm) {
-        loginForm.style.display = 'none'
-      }
-    }
-  }
-
-  $scope.submitLoginData = function () {
-    loginForm.style.display = 'none'
-    homeFactory.canUserLogIn($scope, $scope.name)
-  }
-}
+export default homeModule

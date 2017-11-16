@@ -8,7 +8,10 @@
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
     "prod": "webpack "
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "mysql": "^2.15.0"
+  },
   "devDependencies": {
     "angular": "^1.6.6",
     "angular-ui-router": "^0.4.3",
