@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html data-ng-app="app">
+<div ng-controller="project-controller">
+    <header>
+        <meta charset="utf-8" />
+        <title>Mon Projet</title>
+
+
+        <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+
+        <script src="main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+        <style type="text/css">
+            .box {
+                width: 350px;
+                margin: 50px auto auto auto;
+                border: 1px solid #dedede;
+                border-radius: 5px;
+                padding: 20px;
+            }
+
+            table {
+                width: 1000px;
+                margin: 50px auto auto auto;
+                border: 1px solid #3d1f1f;
+                border-radius: 5px;
+                padding: 20px;
+            }
+        </style>
+
+
+        <div class="row col-sm-12" data-ng-controller="project-controller">
+            <nav class="col-sm-4">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a  href="#/backlog">
+                            <span class="glyphicon glyphicon-home"></span> Equipe </a>
+                    </li>
+                    <li>
+                        <a href="#/depotgit">
+                            <span class="glyphicon glyphicon-book"></span> Depot Git </a>
+                    </li>
+                    <li>
+                        <a href="#/backlog">
+                            <span class="glyphicon glyphicon-book"></span> Backlog </a>
+                    </li>
+                    <li>
+                        <a href="#/sprint">
+                            <span class="glyphicon glyphicon-book"></span> Sprint </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+
+
+    </header>
+
+    <body>
+
+        <div ng-view></div>
+
+    </body>
+</div>
+</html
