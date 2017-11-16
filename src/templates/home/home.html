@@ -1,15 +1,16 @@
 <div class="container">
     
     <div class="centered">
+
         <div id="logo">Scrumizer</div>
         <div class="block-btn">
             <a ng-click="clickSignUp()" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Sign Up</a>
             <a ng-click="clickLogin()" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Log In</a>
         </div>
+
+        
     </div>
-
-    <h1>{{msg}}</h1>
-
+    
     <div id="sign-up-form" class="modal">
         <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
         <form class="modal-content animate" novalidate>
@@ -22,7 +23,6 @@
                 
                 <button class="btn btn-primary submit-btn" ng-click="submitSignUpData()">Submit</button>
                 <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
-
           </div>
         </form>
       </div> 

@@ -1,5 +1,8 @@
+import angular from 'angular'
 
-export default function ($scope, homeFactory) {
+var homeCtrlModule = angular.module('homeCtrlModule', [])
+
+homeCtrlModule.controller('HomeCtrl', ['$scope', 'signUpService', 'loginService', function ($scope, signUpService, loginService) {
   var signUpForm = document.getElementById('sign-up-form')
   var loginForm = document.getElementById('login-form')
 
@@ -32,7 +35,7 @@ export default function ($scope, homeFactory) {
 
   $scope.submitSignUpData = function () {
     signUpForm.style.display = 'none'
-    homeFactory.createUserAccount($scope)
+    signUpService($scope)
   }
 
   $scope.clickLogin = function () {
@@ -49,6 +52,8 @@ export default function ($scope, homeFactory) {
 
   $scope.submitLoginData = function () {
     loginForm.style.display = 'none'
-    homeFactory.canUserLogIn($scope, $scope.name)
+    loginService($scope)
   }
-}
+}])
+
+export default homeCtrlModule

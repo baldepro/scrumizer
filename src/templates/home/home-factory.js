@@ -1,8 +1,29 @@
 import angular from 'angular'
 
-const homeFactory = angular.module('app.homeFactory', [])
+function init ($scope) {
+  $scope.name = ''
+  $scope.email = ''
+  $scope.password = ''
+  $scope.passwordReapet = ''
+  $scope.isUserValid = false
+}
 
-.factory('homeFactory', ['$http', '$location', function ($http, $location) {
+const homeServices = angular.module('app.homeFactory', [])
+
+.service('signUpService', ['$http', '$location', function ($http, $location) {
+  return function ($scope) {
+    $http({
+      method: 'POST',
+      url: '/home/sign-up',
+      data: { name: $scope.name, email: $scope.email, password: $scope.password }
+    }).then((response) => {
+      init($scope)
+    })
+  }
+}]
+)
+
+.service('loginService', ['$http', '$location', function ($http, $location) {
   function init ($scope) {
     $scope.name = ''
     $scope.email = ''
@@ -10,40 +31,25 @@ const homeFactory = angular.module('app.homeFactory', [])
     $scope.passwordReapet = ''
     $scope.isUserValid = false
   }
-  // Indicates if a user can login with the given data
-  function canUserLogIn ($scope, username) {
-    $http({ method: 'GET', url: '/home/login'})
+  return function ($scope) {
+    $http({
+      method: 'POST',
+      url: '/home/login',
+      data: { name: $scope.name }
+    })
     .then(function (response) {
-      $scope.isUserValid = (response.data.password === $scope.password) && (response.data.name === $scope.name)
-      if ($scope.isUserValid) {
-        $location.path('/project')
+      let val = response.data
+      console.log(val)
+      if (val[0].length !== 0 && (val[0].password === $scope.password) && (val[0].name === $scope.name)) {
+        $scope.isUserValid = true
+        $location.path('/project/' + $scope.name)
+        init($scope)
       } else {
+        console.log('----->No such user ' + $scope.name)
         init($scope)
       }
     })
   }
-
-  function createUserAccount ($scope) {
-    $http({
-      method: 'POST',
-      url: '/home/sign-up',
-      data: { name: $scope.name, email: $scope.email, password: $scope.password }
-    }).then(function (response) {
-      console.log('Data have been sent')
-      init($scope)
-      // TODO
-    }).then(function (response) {
-      // TODO
-    })
-  }
-
-  return {
-    canUserLogIn,
-    createUserAccount
-  }
 }])
 
-.factory('signUpFactory', function ($http) {
-})
-
-export default homeFactory
+export default homeServices

@@ -65,13 +65,16 @@ html, body, .container {
 
  /* Full-width input fields */
 input[type=text], input[type=password], textarea {
+    min-height: 30px;
+    min-width: 300px;
     width: 40%;
-    height: 60px;
+    height: 10%;
     padding: 12px 20px;
     margin: 30px 0;
     display: block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    position: relative;
 }
 
 /* Set a style for all buttons */
@@ -82,18 +85,19 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
+    position: relative;
 }
 
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
+    position: absolute; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
+    overflow: hidden; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     padding-top: 60px;
@@ -102,10 +106,13 @@ button {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
     width: 50%; /* Could be more or less, depending on screen size */
+    min-height: 300px;
     background-color: bleu;
+    position: relative;
+    border: 1px solid red;
 }
 
 /* The Close Button (x) */
@@ -155,3 +162,13 @@ table {
 .create-project-btn::after {
   clear: both;
 }
+
+.edit-project-btn {
+  background-color: #38a8ed;
+}
+.delete-project-btn {
+  background-color: #e52222;
+}
+
+
+
