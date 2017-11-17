@@ -44,10 +44,8 @@ homeModule.controller('homeCtrl',
 
       $scope.submitLoginData = function () {
         $scope.loginBtnActivated = false
-        console.log($scope.user.name)
-        console.log($scope.user.email)
-        console.log($scope.user.password)
         loginService($scope)
+        $scope.user.init()
       }
     }
   ])
