@@ -1,4 +1,3 @@
-// TODO
 var ListProject = function () {
 
 }

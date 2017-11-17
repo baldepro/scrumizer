@@ -72,9 +72,9 @@
         <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
         <form class="modal-content animate" novalidate>
             <div class="container form-content">
-                <input type="text" placeholder="Enter project name" ng-model="project.name" required>
-                <textarea class="form-control" rows="5" placeholder="Enter description" ng-model="project.description"></textarea>
-                <input type="text" placeholder="Enter git repository" ng-model="project.git" required>
+                <input class="name" type="text" placeholder="Enter project name" ng-model="project.name" required>
+                <textarea class="form-control description" rows="5" placeholder="Enter description" ng-model="project.description"></textarea>
+                <input class="git" type="text" placeholder="Enter git repository" ng-model="project.git" required>
                 
                 <button class="btn btn-primary submit-btn" ng-click="create()">Submit</button>
                 <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>

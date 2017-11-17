@@ -1,7 +1,7 @@
 describe('To test the home page', function () {
-  let homeUrl = 'http://localhost:3000/'
-  const name = 'toto'
-  const email = 'toto@email.fr'
+  let homeUrl = 'http://localhost:8080/'
+  const name = 'failer'
+  const email = 'failer@email.fr'
   const password = 'torototo'
   const wrongName = 'tot'
   const wrongPassword = 'tototo'
@@ -29,6 +29,9 @@ describe('To test the home page', function () {
         signUpPage.enterFieldPassWord(password)
       })
       .then(function () {
+        signUpPage.enterFieldPassWordBis(password)
+      })
+      .then(function () {
         signUpPage.clickSubmit()
       })
     })
@@ -50,6 +53,7 @@ describe('To test the home page', function () {
     })
 
     it('should stay to the login page after when all fields are not filled up', function () {
+      homePage.clickBtn('login-btn')
       loginPage.enterFieldName('')
       .then(function () {
         loginPage.enterFieldPassword(wrongPassword)
@@ -60,6 +64,7 @@ describe('To test the home page', function () {
     })
 
     it('should move to the user projects page  after the click on the submit button', function () {
+      homePage.clickBtn('login-btn')
       loginPage.enterFieldName(name)
       .then(function () {
         loginPage.enterFieldPassword(password)
@@ -70,20 +75,19 @@ describe('To test the home page', function () {
     })
   })
 
-  // Projects page
+  // // Projects page
   describe('Test the Project page', function () {
-    var projectPage = require('./pages/project/projects-list-page')
+    var projectPage = require('./pages/project/project-page')
 
     // Test the content of the projects page
     it('should contain a button and a table', function () {
-      expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
-      expect(projectPage.isPresent('create-project-btn')).toBe(true)
+      browser.driver.sleep(10000)
+      expect(projectPage.isBtnPresent('create-project-btn')).toBe(true)
     })
 
     // Create project button
     it('should move to the project creation page', function () {
       projectPage.clickBtn()
-      // expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
     })
 
     // Project creation page
@@ -95,9 +99,11 @@ describe('To test the home page', function () {
         .then(function () {
           createProjectPage.enterFieldDescription('this is my first project')
         })
+        .then(() => {
+          createProjectPage.enterFieldGit('git.com/scrum')
+        })
         .then(function () {
           createProjectPage.clickSubmit()
-          // expect(browser.getCurrentUrl()).toEqual('http://localhost:3000/project/:1')
         })
       })
     })

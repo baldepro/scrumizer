@@ -1,10 +1,14 @@
 var CreateProjectPage = function () {
   this.enterFieldName = function (name) {
-    return element(by.model('name')).sendKeys(name)
+    return element(by.css('.name')).sendKeys(name)
   }
 
   this.enterFieldDescription = function (description) {
-    return element(by.model('description')).sendKeys(description)
+    return element(by.css('.description')).sendKeys(description)
+  }
+
+  this.enterFieldGit = function (git) {
+    return element(by.css('.git')).sendKeys(git)
   }
 
   this.clickSubmit = function () {

@@ -4,11 +4,11 @@ var LoginPage = function () {
   }
 
   this.enterFieldName = function (name) {
-    return element(by.model('name')).sendKeys(name)
+    return element(by.css('.name')).sendKeys(name)
   }
 
   this.enterFieldPassword = function (password) {
-    return element(by.model('password')).sendKeys(password)
+    return element(by.css('.password')).sendKeys(password)
   }
 
   this.clickSubmit = function () {
