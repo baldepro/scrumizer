@@ -1,59 +1,90 @@
--- phpMyAdmin SQL Dump
--- version 4.2.12deb2+deb8u2
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 09, 2017 at 03:45 PM
--- Server version: 5.5.58-0+deb8u1
--- PHP Version: 5.6.30-0+deb8u1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `scrum`
---
-
-DELIMITER $$
---
--- Procedures
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `edit_project`(IN `project_id` INT, IN `name` VARCHAR(20), IN `git_url` VARCHAR(255), IN `description` VARCHAR(2000))
-    MODIFIES SQL DATA
+DROP FUNCTION IF EXISTS get_projects_from_user(INT);
+CREATE FUNCTION get_projects_from_user(user_id INT) 
+RETURNS TABLE(name VARCHAR(20), git_url VARCHAR(255), description VARCHAR(2000), role role) AS $$
+#variable_conflict use_variable
 BEGIN
-    UPDATE `project`
-    SET `name` = name, `git_url` = git_url, `description` = description
-    WHERE `id` = project_id;
-END$$
+	RETURN QUERY 
+	SELECT project.name, project.git_url, project.description, user_has_project.user_role FROM project
+	INNER JOIN user_has_project ON (project.id = user_has_project.project_id)
+	WHERE user_has_project.user_id = user_id;
+END $$ LANGUAGE plpgsql;
 
---
--- Functions
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `create_project`(`user_id` INT, `name` VARCHAR(20), `git_url` VARCHAR(255), `description` VARCHAR(2000)) RETURNS int(11)
-    MODIFIES SQL DATA
+
+DROP FUNCTION IF EXISTS get_project_from_user(INT, INT);
+CREATE FUNCTION get_project_from_user(user_id INT, project_id INT) 
+RETURNS TABLE(name VARCHAR(20), git_url VARCHAR(255), description VARCHAR(2000), role role) AS $$
+#variable_conflict use_variable
 BEGIN
-    DECLARE is_name_already_used BOOL;
-    DECLARE project_id INT;
-    
-    SET is_name_already_used = EXISTS(SELECT 1 FROM `project` WHERE project.name = name);
-    IF is_name_already_used THEN RETURN 1; END IF;
-    
-    INSERT INTO `project` (`name`, `git_url`, `description`) VALUES (name, git_url, description);
-    SET project_id = LAST_INSERT_ID();
-    
-    INSERT INTO `user_has_project` (`user_id`, `project_id`) VALUES (user_id, project_id);
+	RETURN QUERY 
+	SELECT project.name, project.git_url, project.description, user_has_project.user_role FROM project
+	INNER JOIN user_has_project ON user_has_project.project_id = project.id
+	WHERE project.id = project_id AND user_has_project.user_id = user_id;
+END $$ LANGUAGE plpgsql;
 
-    RETURN 0;
-END$$
 
-DELIMITER ;
+DROP FUNCTION IF EXISTS create_project(INT, VARCHAR(20), VARCHAR(255), VARCHAR(2000));
+CREATE FUNCTION create_project(user_id INT, name VARCHAR(20), git_url VARCHAR(255) DEFAULT NULL, description VARCHAR(2000) DEFAULT NULL) 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	INSERT INTO project (name, git_url, description, creator_id) 
+	VALUES (name, git_url, description, user_id) RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DROP FUNCTION IF EXISTS edit_project(INT, VARCHAR(20), VARCHAR(255), VARCHAR(2000));
+CREATE FUNCTION edit_project(project_id INT, name VARCHAR(20), git_url VARCHAR(255), description VARCHAR(2000)) 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	UPDATE project
+    	SET name = name, git_url = git_url, description = description
+    	WHERE id = project_id
+    	RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS delete_project(INT);
+CREATE FUNCTION delete_project(project_id INT) 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	DELETE FROM project WHERE id = project_id RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS create_user(VARCHAR(20), role);
+CREATE FUNCTION create_user(name VARCHAR(20), role role DEFAULT 'developer') 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	INSERT INTO "user" (name) 
+	VALUES (name) RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS edit_user(INT, VARCHAR(20));
+CREATE FUNCTION edit_user(user_id INT, name VARCHAR(20)) 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	UPDATE "user"
+    	SET name = name
+    	WHERE id = user_id
+    	RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
+
+
+DROP FUNCTION IF EXISTS delete_user(INT);
+CREATE FUNCTION delete_user(user_id INT) 
+RETURNS INT AS $$
+DECLARE result INT DEFAULT 1;
+BEGIN
+	DELETE FROM "user" WHERE id = user_id RETURNING 0 INTO result;
+    	RETURN result;
+END$$ LANGUAGE plpgsql;
