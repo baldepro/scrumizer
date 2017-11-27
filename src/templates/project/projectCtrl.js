@@ -4,8 +4,8 @@ import angular from 'angular'
 var projectCtrlModule = angular.module('homeCtrlModule', [])
 
 .controller('projectCtrl',
-  ['$scope', 'createProjectService', 'getProjectsService', 'deleteProjectService', 'updateProjectService',
-    function ($scope, createProjectService, getProjectsService, deleteProjectService, updateProjectService) {
+  ['$scope', '$location', 'createProjectService', 'getProjectsService', 'deleteProjectService', 'updateProjectService', 'getOneProjectsService',
+    function ($scope, $location, createProjectService, getProjectsService, deleteProjectService, updateProjectService, getOneProjectsService) {
       $scope.projects = []
 
       getProjectsService($scope)
@@ -56,7 +56,11 @@ var projectCtrlModule = angular.module('homeCtrlModule', [])
 
         updateProjectService($scope)
       }
-
+      $scope.getBacklog = project => {
+        project.isEditing = false
+        $scope.proj = project
+        getOneProjectsService($scope, $location)
+      }
       $scope.deleteProject = projectToDelete => {
         $scope.project.name = projectToDelete.name
         $scope.project.description = projectToDelete.description
