@@ -10,7 +10,8 @@ CREATE TYPE status AS ENUM ('done', 'todo', 'work_in_progress');
 DROP TABLE IF EXISTS "user";
 CREATE TABLE "user" (
   id SERIAL PRIMARY KEY,
-  name varchar(20) UNIQUE NOT NULL
+  name varchar(20) UNIQUE NOT NULL,
+  password varchar(20) NOT NULL
 ) ;
 
 DROP TABLE IF EXISTS e2e_test;
