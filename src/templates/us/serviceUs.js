@@ -6,10 +6,9 @@ var usServices = angular.module('usServices', [])
     $http({
       method: 'POST',
       url: '/us/create',
-      data: { description: $scope.us.description, priority: $scope.us.priority, points: $scope.us.cost, status: 'todo', project_id: 2 }
+      data: { description: $scope.us.description, priority: $scope.us.priority, points: $scope.us.cost, status: 'todo', project_id: $scope.idProject }
     })
     .then((response) => {
-      console.log(response.data)
     }, (error) => {
       console.log('error: ' + error)
     })
@@ -17,7 +16,6 @@ var usServices = angular.module('usServices', [])
 })
 .service('getUsService', function ($http) {
   return function ($scope) {
-    console.log($scope.idProject)
     $http({
       method: 'GET',
       url: '/us/' + $scope.idProject
