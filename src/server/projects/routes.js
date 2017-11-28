@@ -1,86 +1,63 @@
-var express = require('express')
-var router = express.Router()
-const {Customer} = require('mysql')
-const connexionString = 'postgresql://postgres:password@localhost:5432/scrum'
+/** -------------------------------------------------------------
+ *    Routes for project page
+ *------------------------------------------------------------ */
+ var express = require('express')
+ var router = express.Router()
+ var mysql = require('mysql')
+ var db = mysql.createConnection({
+   host: 'localhost',
+   user: 'root',
+   password: '',
+   database: 'scrumdb'
+ })
 
-router.post('/project/:user_id', function (req, res) {
-  var results = []
-  var newProject = [req.body.params.name, req.body.params.depot, req.body.params.description, req.params.user_id]
-  var customer = new Customer({connexionString: connexionString})
-  customer.connect()
-  customer.query('call create_project(?, ?, ?)', newProject, function (error, result) {
-    if (error) {
-      throw error
-    } else {
-      result.push(result)
-    }
-    customer.end()
+ db.connect((error) => {
+   if (error) {
+     console.log('Error for connection to data base')
+   } else {
+     console.log('Connection established with the database')
+   }
+ })
+
+router.get('/', (req, res) => {
+  let sql = 'SELECT * FROM project'
+  db.query(sql, (err, result) => {
+    if (err) throw err
+    res.send(result)
   })
-  return res.json(results)
 })
-
-router.get('/project/:user_id', function (req, res) {
-  var results = []
-  var user_id = [req.params.user_id]
-  var customer = new Customer({connexionString: connexionString})
-  customer.connect()
-  customer.query('call get_projects_from_user(?)', user_id, function (error, result) {
-    if (error) {
-      throw error
-    } else {
-      result.push(result)
-    }
-    customer.end()
+router.get('/:name', (req, res) => {
+  let projectName = req.body.name
+  let sql = `SELECT * FROM project WHERE project.name='${projectName}'`
+  db.query(sql, (err, result) => {
+    if (err) throw err
+    res.send(result)
   })
-  return res.json(results)
 })
-
-router.get('/project/:user_id', function (req, res) {
-  var results = []
-  var projet_info = [req.params.user_id, req.body.name]
-  var customer = new Customer({connexionString: connexionString})
-  customer.connect()
-  customer.query('call get_project_from_user(?,?)', projet_info, function (error, result) {
-    if (error) {
-      throw error
-    } else {
-      result.push(result)
-    }
-    customer.end()
+router.post('/create', (req, res) => {
+  let sql = 'INSERT INTO project SET ?'
+  db.query(sql, req.body, (err, result) => {
+    if (err) throw err
+    res.send('Project created')
   })
-  return res.json(results)
 })
-
-router.put('/project/:id', function (req, res) {
-  var results = []
-  var projet_info = [req.params.id, req.body.params.name, req.body.params.depot, req.body.params.desc]
-  var customer = new Customer({connexionString: connexionString})
-  customer.connect()
-  customer.query('call edit_project(?, ?, ?, ?)', projet_info, function (error, result) {
-    if (error) {
-      throw error
-    } else {
-      result.push(result)
-    }
-    customer.end()
+router.post('/delete', (req, res) => {
+  let projectName = req.body.name
+  let sql = `DELETE FROM project WHERE project.name='${projectName}'`
+  db.query(sql, req.body, (err, result) => {
+    if (err) throw err
+    res.send(result)
   })
-  return res.json(results)
 })
+router.post('/update', (req, res) => {
+  let projectName = req.body.name
+  let projectDesc = req.body.description
+  let projectGit = req.body.git_url
 
-router.delete('/project/:id', function (req, res) {
-  var results = []
-  var project_id = [req.params.id]
-  var customer = new Customer({connexionString: connexionString})
-  customer.connect()
-  customer.query('call delete_project(?)', project_id, function (error, result) {
-    if (error) {
-      throw error
-    } else {
-      result.push(result)
-    }
-    customer.end()
+  let sql = `UPDATE project SET project.name='${projectName}', project.description='${projectDesc}' WHERE project.git_url='${projectGit}'`
+  db.query(sql, req.body, (err, result) => {
+    if (err) throw err
+    res.send(result)
   })
-  return res.json(results)
 })
-
 module.exports = router
