@@ -1,3 +1,6 @@
+--------------------------------------------------------------
+---------------- after insert project ------------------------
+--------------------------------------------------------------
 DROP FUNCTION IF EXISTS add_user_has_project() CASCADE;
 CREATE FUNCTION add_user_has_project()
 RETURNS TRIGGER AS $$
@@ -7,11 +10,6 @@ BEGIN
 	RETURN NEW;
 END $$ LANGUAGE plpgsql; 
 
-
 DROP TRIGGER IF EXISTS after_insert_project ON project;
 CREATE TRIGGER after_insert_project AFTER INSERT ON project
  FOR EACH ROW EXECUTE PROCEDURE add_user_has_project();
-
---------------------------------------------------------------
---------------------------------------------------------------
-
