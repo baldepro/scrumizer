@@ -1,26 +1,19 @@
-DROP TYPE IF EXISTS role;
+DROP TYPE IF EXISTS role CASCADE;
 CREATE TYPE role AS ENUM ('developer', 'product_owner');
 
-DROP TYPE IF EXISTS priority;
+DROP TYPE IF EXISTS priority CASCADE;
 CREATE TYPE priority AS ENUM ('high', 'low', 'medium');
 
-DROP TYPE IF EXISTS status;
+DROP TYPE IF EXISTS status CASCADE;
 CREATE TYPE status AS ENUM ('done', 'todo', 'work_in_progress');
 
-DROP TABLE IF EXISTS "user";
+DROP TABLE IF EXISTS "user" CASCADE;
 CREATE TABLE "user" (
   id SERIAL PRIMARY KEY,
-  name varchar(20) UNIQUE NOT NULL,
-  password varchar(20) NOT NULL
+  name varchar(20) UNIQUE NOT NULL
 ) ;
 
-DROP TABLE IF EXISTS e2e_test;
-CREATE TABLE e2e_test (
-  id SERIAL PRIMARY KEY,
-  path varchar(255) NOT NULL 
-) ;
-
-DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS project CASCADE;
 CREATE TABLE project (
   id SERIAL PRIMARY KEY,
   name varchar(20) UNIQUE NOT NULL,
@@ -29,24 +22,30 @@ CREATE TABLE project (
   creator_id SERIAL REFERENCES "user" (id) ON DELETE CASCADE
 ) ;
 
-DROP TABLE IF EXISTS build;
+DROP TABLE IF EXISTS build CASCADE;
 CREATE TABLE build (
   id SERIAL PRIMARY KEY,
-  name varchar(20) UNIQUE NOT NULL,
   path varchar(255) NOT NULL ,
-  size int CHECK (size > 0) NOT NULL DEFAULT '0' ,
   project_id SERIAL REFERENCES project (id) ON DELETE CASCADE
 ) ;
 
-DROP TABLE IF EXISTS sprint;
+DROP TABLE IF EXISTS e2e_test CASCADE;
+CREATE TABLE e2e_test (
+  id SERIAL PRIMARY KEY,
+  path varchar(255) NOT NULL,
+  project_id SERIAL REFERENCES project (id) ON DELETE CASCADE
+) ;
+
+DROP TABLE IF EXISTS sprint CASCADE;
 CREATE TABLE sprint (
   id SERIAL PRIMARY KEY,
+  name varchar(20) UNIQUE NOT NULL,
   start_time timestamp(0) NOT NULL,
-  end_time timestamp(0) NOT NULL,
+  end_time timestamp(0) CHECK(start_time < end_time) NOT NULL,
   project_id SERIAL REFERENCES project(id) ON DELETE CASCADE
 ) ;
 
-DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS task CASCADE;
 CREATE TABLE task (
   id SERIAL PRIMARY KEY,
   description varchar(500) DEFAULT NULL,
@@ -56,7 +55,7 @@ CREATE TABLE task (
   UNIQUE (developer_id,sprint_id)
 ) ;
 
-DROP TABLE IF EXISTS user_has_project;
+DROP TABLE IF EXISTS user_has_project CASCADE;
 CREATE TABLE user_has_project (
   id SERIAL PRIMARY KEY,
   user_id SERIAL REFERENCES "user"(id) ON DELETE CASCADE,
@@ -65,9 +64,10 @@ CREATE TABLE user_has_project (
   UNIQUE (user_id, user_role, project_id)
 ) ;
 
-DROP TABLE IF EXISTS user_story;
+DROP TABLE IF EXISTS user_story CASCADE;
 CREATE TABLE user_story (
   id SERIAL PRIMARY KEY,
+  name varchar(20) UNIQUE NOT NULL,
   description varchar(500) DEFAULT NULL,
   priority priority NOT NULL DEFAULT 'medium',
   points int CHECK(points >= 0) NOT NULL DEFAULT '0',
@@ -75,7 +75,7 @@ CREATE TABLE user_story (
   project_id SERIAL REFERENCES project(id) ON DELETE CASCADE
 ) ;
 
-DROP TABLE IF EXISTS user_story_has_build;
+DROP TABLE IF EXISTS user_story_has_build CASCADE;
 CREATE TABLE user_story_has_build (
   id SERIAL PRIMARY KEY,
   user_story_id SERIAL REFERENCES user_story (id) ON DELETE CASCADE,
@@ -83,7 +83,7 @@ CREATE TABLE user_story_has_build (
   UNIQUE (user_story_id, build_id)
 ) ;
 
-DROP TABLE IF EXISTS user_story_has_e2e_test;
+DROP TABLE IF EXISTS user_story_has_e2e_test CASCADE;
 CREATE TABLE user_story_has_e2e_test (
   id SERIAL PRIMARY KEY,
   user_story_id SERIAL REFERENCES user_story(id) ON DELETE CASCADE,
