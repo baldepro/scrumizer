@@ -1,16 +1,21 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
+const user = require('../database/user')
 
-router.get('/', (req, res) => {
-  res.send('Hello From /home')
+router.post('/signup', (request, response) => {
+  user.add(request, response, request.body)
 })
 
-router.get('/login', (req, res) => {
-  res.send({ name: 'toto', password: 'torototo' })
+router.post('/login', (request, response) => {
+  user.get(request, response, request.body)
 })
 
-router.put('/sign-up', (req, res) => {
+router.post('/update', (request, response) => {
+  user.update(request, response, request.body)
+})
 
+router.post('/delete', (request, response) => {
+  user.delete(request, response, request.body)
 })
 
 module.exports = router

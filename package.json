@@ -10,8 +10,11 @@
     "test": "webdriver-management start && protractor src/E2E-Tests/conf.js"
   },
   "dependencies": {
+    "bcrypt": "^1.0.3",
+    "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "nodemon": "^1.12.1"
   },
   "devDependencies": {
     "angular": "^1.6.6",
