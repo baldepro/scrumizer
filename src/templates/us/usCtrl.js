@@ -4,8 +4,8 @@ import angular from 'angular'
 var usCtrl = angular.module('usCtrl', [])
 
 .controller('usCtrl',
-  ['$scope', '$stateParams', 'createUsService', 'getUsService', 'deleteUsService', 'updateUsService',
-    function ($scope, $stateParams, createUsService, getUsService, deleteUsService, updateUsService) {
+  ['$scope', '$stateParams', '$location', 'createUsService', 'getUsService', 'deleteUsService', 'updateUsService',
+    function ($scope, $stateParams, $location, createUsService, getUsService, deleteUsService, updateUsService) {
       $scope.us = []
       $scope.createUsBtnActivated = false
       $scope.idProject = $stateParams.project_id
@@ -33,6 +33,13 @@ var usCtrl = angular.module('usCtrl', [])
           this.states = ' '
           this.project_id = ' '
         }
+      }
+      $scope.clickSprint = function () {
+        $location.path('/sprint/' + $stateParams.project_id)
+      }
+
+      $scope.clickBacklog = function () {
+        $location.path('/us/' + $stateParams.project_id)
       }
 
       $scope.create = function () {

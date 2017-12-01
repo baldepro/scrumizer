@@ -3,8 +3,8 @@
 <div>
     <header>
         <meta charset="utf-8" />
-        <title>backlog</title>
-        <div class="row col-sm-12" data-ng-controller="usCtrl">
+        <title>sprints</title>
+        <div class="row col-sm-12" data-ng-controller="sprintCtrl">
             <nav class="col-sm-4">
                 <ul class="nav navbar-nav">
                     <li class="active">
@@ -23,90 +23,68 @@
                         <a ng-click = "clickSprint()" href="#/sprint">
                             <span class="glyphicon glyphicon-book"></span> Sprint </a>
                     </li>
-
                 </ul>
             </nav>
         </div>
     </header>
     <body>
 
-      <div data-ng-controller="usCtrl">
+      <div data-ng-controller="sprintCtrl">
 
           <div>
               <div class="container">
-                  <p class="h1"> Backlog </p>
+                  <p class="h1"> Sprints </p>
                   <a ng-click="clickCreateUsBtn()" class="btn btn-primary a-btn-slide-text create-project-btn">
                       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                      <span><strong>New US</strong></span>
+                      <span><strong>New sprint</strong></span>
                   </a>
                   <table style="width: 90%;" class=" box table ">
                       <thead>
                           <tr>
-                              <th style="width: 30%;" scope="col">Numero US</th>
-                              <th style="width: 30%;" scope="col">Description</th>
-                              <th style="width: 10%;" scope="col">priorite</th>
-                              <th style="width: 10%;" scope="col">Cout</th>
-                              <th style="width: 10%;" scope="col">Status</th>
+                              <th style="width: 20%;" scope="col">Numero sprint</th>
+                              <th style="width: 30%;" scope="col">Date de debut</th>
+                              <th style="width: 30%;" scope="col">Date de fin</th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr data-ng-repeat="(index , us) in us ">
+                          <tr data-ng-repeat="(index , sprint) in sprints ">
                               <td>#{{index+1}}
-                                <form ng-submit="updateUs(us)">
-                                  <input ng-model="us.updatedProjectId" type="hidden" name="" ng-value="us.project_id"/>
-                                </form>
                               </td>
                               <td>
-                                <a ng-if='!us.isEditing'>{{us.description}}</a>
-                                <form ng-submit="updateUs(us)">
-                                    <textarea ng-value="us.description" ng-if="us.isEditing"
-                                            ng-model="us.updatedDesc"
-                                            class="form-control project-update-input"></textarea>
-                                </form>
-                              </td>
-                              <td>
-                                <a ng-if='!us.isEditing'>{{us.priority}}</a>
-                                <form ng-submit="updateUs(us)">
-                                    <input ng-value="us.priority" ng-if="us.isEditing"
-                                            ng-model="us.updatedPriority"
+                                <a ng-if='!sprint.isEditing'>{{sprint.start_time}}</a>
+                                <form ng-submit="updateSprint(sprint)">
+                                    <input ng-value="sprint.start_time" ng-if="sprint.isEditing"
+                                            ng-model="sprint.updatedStart_time"
                                             class="form-control project-update-input"/>
                                 </form>
                               </td>
                               <td>
-                                <a ng-if='!us.isEditing'>{{us.cost}}</a>
-                                <form ng-submit="updateUs(us)">
-                                    <input ng-value="us.cost" ng-if="us.isEditing"
-                                            ng-model="us.updatedPoints"
+                                <a ng-if='!sprint.isEditing'>{{sprint.end_time}}</a>
+                                <form ng-submit="updateSprint(sprint)">
+                                    <input ng-value="sprint.end_time" ng-if="sprint.isEditing"
+                                            ng-model="sprint.updatedEnd_time"
                                             class="form-control project-update-input"/>
                                 </form>
                               </td>
                               <td>
-                                <a ng-if='!us.isEditing'>{{us.states}}</a>
-                                <form ng-submit="updateUs(us)">
-                                    <input ng-value="us.states" ng-if="us.isEditing"
-                                            ng-model="us.updatedStatus"
-                                            class="form-control project-update-input"/>
-                                </form>
-                              </td>
-                              <td>
-                                  <a ng-if="!us.isEditing" ng-click="onEditClick(us)"
+                                  <a ng-if="!sprint.isEditing" ng-click="onEditClick(sprint)"
                                       class="btn btn-primary a-btn-slide-text edit-project-btn" >
                                       <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                       <span><strong>Edit</strong></span>
                                   </a>
-                                  <a ng-if="!us.isEditing" ng-click="deleteUs(us)"
+                                  <a ng-if="!sprint.isEditing" ng-click="deleteSprint(sprint)"
                                        class="btn btn-primary a-btn-slide-text delete-project-btn">
                                       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                       <span><strong>Delete</strong></span>
                                   </a>
 
-                                  <a ng-if="us.isEditing" href="#"
+                                  <a ng-if="sprint.isEditing" href="#"
                                       class="btn btn-primary a-btn-slide-text save-update-project-btn"
-                                      ng-click="upadteUs(us)">
+                                      ng-click="upadteSprint(sprint)">
                                           <span class="glyphicon glyphicon-save" aria-hidden="true"></span>
                                           <span><strong>Save</strong></span>
                                       </a>
-                                      <a ng-if="us.isEditing"  ng-click="onCancelClick(us)"
+                                      <a ng-if="sprint.isEditing"  ng-click="onCancelClick(sprint)"
                                           class="btn btn-default a-btn-slide-text cancel-update-project-btn">
                                           <span class="glyphicon glyphicon-cancel" aria-hidden="true"></span>
                                           <span><strong>Cancel</strong></span>
@@ -116,24 +94,18 @@
                       </tbody>
                   </table>
               </div>
-
-
           </div>
           <div ng-if="createUsBtnActivated" id="create-project-form" class="modal">
               <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
               <form class="modal-content animate" novalidate>
                   <div class="form-group">
-                      <label for="">Description</label>
-                      <textarea class="form-control" required="required" ng-model="us.description" type="text"></textarea>
-                  </div>
-                  <div class="form-group">
-                      <label for="tb-name">Priorite</label>
-                      <input type="tb-name" data-ng-disabled="!us.description" ng-model="us.priority" class="form-control" type="number"
+                      <label for="tb-name">Date de debut</label>
+                      <input type="tb-name" ng-model="sprint.start_time" class="form-control" type="date"
                           step="8" value="0" min="0" max="64" required="required" />
                   </div>
                   <div class="form-group">
-                      <label for="tb-age">Cout</label>
-                      <input type="tb-age" data-ng-disabled="!us.description" ng-model="us.cost" class="form-control" type="number" required="required"
+                      <label for="tb-age">Date de fin</label>
+                      <input type="tb-age" ng-model="sprint.end_time" class="form-control" type="date" required="required"
                       />
                   </div>
 

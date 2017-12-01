@@ -5,6 +5,7 @@ var router        = express.Router()
 var usRoutes      =  require('./src/server/user-stories/routes')
 var homeRoutes    =  require('./src/server/home/routes')
 var projectRoutes =  require('./src/server/projects/routes')
+var sprintRoutes  =  require('./src/server/sprints/routes')
 var mysql         = require('mysql')
 var bodyParser    = require('body-parser')
 
@@ -12,7 +13,7 @@ app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 
 var PORT = process.env.PORT || 3000
-
+/*
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -27,7 +28,7 @@ db.connect((error) => {
     console.log('Connection established with the database')
   }
 })
-
+*/
 app.use(express.static(path.join(__dirname, 'public')))
 
 /** -------------------------------------------------------------
@@ -43,11 +44,15 @@ app.use('/project', projectRoutes)
  *------------------------------------------------------------ */
 app.use('/us', usRoutes)
 
+/** -------------------------------------------------------------
+ *  using  Routes for sprint page
+ *------------------------------------------------------------ */
+app.use('/sprint', sprintRoutes)
+/*
 app.all('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'public/index.html'))
 })
-
+*/
 app.listen(PORT, function () {
   console.log('server is running on port ' + PORT)
 })
-module.exports = db

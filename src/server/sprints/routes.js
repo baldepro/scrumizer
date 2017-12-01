@@ -1,7 +1,7 @@
 /** -------------------------------------------------------------
  *    Routes for user stories
  *------------------------------------------------------------ */
-/*
+
  var express = require('express')
  var router = express.Router()
  var mysql = require('mysql')
@@ -16,34 +16,30 @@
    if (error) {
      console.log('Error for connection to data base')
    } else {
-     console.log('Connection established with the database')
+     console.log('Connection established with the database in sprint root')
    }
  })
  router.get('/:project_id', (req, res) => {
    let id = req.params.project_id
-   let sql = `SELECT * FROM user_story WHERE user_story.project_id='${id}'`
+   let sql = `SELECT * FROM sprint WHERE sprint.project_id='${id}'`
    db.query(sql, (err, result) => {
      if (err) throw err
      res.send(result)
    })
  })
  router.post('/create', (req, res) => {
-   let usId = req.body.project_id
-   let desc = req.body.description
-   let priority = req.body.priority
-   let points = req.body.points
-   let status = req.body.status
-   let pId = req.body.project_id
-   let sql = 'INSERT INTO user_story SET ?'
+   let projectId = req.body.project_id
+   let start_time = req.body.start_time
+   let end_time = req.body.end_time
+   let sql = 'INSERT INTO sprint SET ?'
    db.query(sql, req.body, (err, result) => {
      if (err) console.log(err)
      res.send('us created')
    })
  })
  router.post('/delete', (req, res) => {
-   let usId = req.body.id
-   console.log(usId)
-   let sql = `DELETE FROM user_story WHERE user_story.id='${usId}'`
+   let sprintId = req.body.id
+   let sql = `DELETE FROM sprint WHERE sprint.id='${sprintId}'`
    db.query(sql, req.body, (err, result) => {
      if (err) throw err
      res.send(result)
@@ -51,17 +47,13 @@
  })
  router.post('/update', (req, res) => {
    let id = req.body.id
-   let usDesc = req.body.description
-   let usPriority = req.body.priority
-   let usPoints = req.body.points
-   let usStatus = req.body.status
-   let usProjectId = req.body.project_id
-   console.log('des' + usDesc)
-   let sql = `UPDATE user_story SET user_story.description='${usDesc}', user_story.priority='${usPriority}' , user_story.points='${usPoints}', user_story.status='${usStatus}' WHERE user_story.id='${id}'`
+   let start_time = req.body.start_time
+   let end_time = req.body.end_time
+   let ProjectId = req.body.project_id
+   let sql = `UPDATE sprint SET sprint.start_time='${start_time}', sprint.end_time='${end_time}' WHERE sprint.id='${id}'`
    db.query(sql, req.body, (err, result) => {
      if (err) throw err
      res.send(result)
    })
  })
 module.exports = router
-*/
