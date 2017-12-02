@@ -4,15 +4,19 @@ var SignUpPage = function () {
   }
 
   this.enterFieldName = function (name) {
-    return element(by.model('name')).sendKeys(name)
+    return element(by.css('.name')).sendKeys(name)
   }
 
   this.enterFieldEmail = function (email) {
-    return element(by.model('email')).sendKeys(email)
+    return element(by.css('.email')).sendKeys(email)
   }
 
   this.enterFieldPassWord = function (password) {
-    return element(by.model('password')).sendKeys(password)
+    return element(by.css('.password')).sendKeys(password)
+  }
+
+  this.enterFieldPassWordBis = function (password) {
+    return element(by.css('.password-repeat')).sendKeys(password)
   }
 
   this.clickSubmit = function () {

@@ -98,7 +98,6 @@ ALTER TABLE `e2e_test`
 
 ALTER TABLE `project`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `git_url_UNIQUE` (`git_url`),
   ADD UNIQUE KEY `name_UNIQUE` (`name`);
 
 ALTER TABLE `sprint`
