@@ -16,12 +16,12 @@
                 <input class="password" type="password" placeholder="Enter Password" ng-model="user.password" required>
                 <input class="password-repeat" type="password" placeholder="Repeat Password" ng-model="user.passwordBis" required>
                 <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                
+
                 <button class="btn btn-primary submit-btn" ng-click="submitSignUpData()">Submit</button>
                 <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
           </div>
         </form>
-      </div> 
+      </div>
       <div ng-if="loginBtnActivated" id="login-form" class="modal">
             <span class="close" title="Close Modal" ng-click="clickCancelBtn()">×</span>
             <form class="modal-content animate" novalidate>
@@ -29,11 +29,11 @@
                     <input class="name" type="text" placeholder="Enter name" ng-init="" ng-model="user.name" required>
                     <input class="password" type="password" placeholder="Enter Password" ng-model="user.password" required>
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    
+
                     <button class="btn btn-primary submit-btn" ng-click="submitLoginData()">Submit</button>
                     <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
               </div>
             </form>
-          </div> 
-      
+          </div>
+
 </div>
