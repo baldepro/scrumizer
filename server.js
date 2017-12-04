@@ -1,13 +1,13 @@
-var express = require('express')
-var app = express()
-var path = require('path')
-var Routes = require('./src/server/routes')
-var bodyParser = require('body-parser')
-var PORT = process.env.PORT || 3000
+const express = require('express')
+const app = express()
+const path = require('path')
+const bodyParser = require('body-parser')
+const Routes = require('./src/server/routes')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+var PORT = process.env.PORT || 3000
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(function (req, res, next) {
@@ -18,6 +18,8 @@ app.use(function (req, res, next) {
 
 Routes(app)
 
-app.listen(PORT, () => {
-  console.log('Server is listening at port ' + PORT)
+// app.use('/sprint', sprintRoutes)
+
+app.listen(PORT, function () {
+  console.log('server is running on port ' + PORT)
 })

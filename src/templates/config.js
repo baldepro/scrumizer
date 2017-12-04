@@ -8,9 +8,9 @@ import uiRouter from 'angular-ui-router'
 
 const app = angular.module('app', [uiRouter, homeModule.name, homeServices.name, projectCtrl.name, projectServices.name, userSession.name])
 
-app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
+app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) => {
+  $qProvider.errorOnUnhandledRejections(false)
   $urlRouterProvider.otherwise('/')
-
   $stateProvider
         .state('home', {
           url: '/',
@@ -26,6 +26,16 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider) => {
               $location.path('/')
             }
           }]
+        })
+        .state('us', {
+          url: '/us/:project_id',
+          template: require('./us/index.html'),
+          controller: 'usCtrl'
+        })
+        .state('sprint', {
+          url: '/sprint/:project_id',
+          template: require('./sprint/index.html'),
+          controller: 'sprintCtrl'
         })
 
   $locationProvider.html5Mode({

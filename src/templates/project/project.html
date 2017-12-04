@@ -3,7 +3,6 @@
     <a class="logout" ng-click="logout()">Logout</a>
 </div>
 
-
 <div class="container">
     <div class="btn-container">
         <button type="button" class="btn btn-default create-project-btn" ng-click="newProjectBtn()">
@@ -24,6 +23,7 @@
             <tr ng-repeat="project in projects">
                 <td> <a>{{project.name}}</a> </td>
                 <td>
+<<<<<<< HEAD
                     <span>{{project.description}}</span>
                 </td>
                 <td>{{project.git}}</td>
@@ -34,7 +34,6 @@
                     <button type="button" class="btn btn-default delete-btn" ng-click="deleteProject(project)">
                         <span class="glyphicon glyphicon-remove"></span> Delete
                     </button>
-
                 </td>
             </tr>
         </tbody>
