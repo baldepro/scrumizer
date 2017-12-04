@@ -24,7 +24,6 @@ exports.add = function (request, response, body) {
 exports.update = function (request, response, body) {
   try {
     if (!body.id) throw new Error('Input Not Valid')
-
     connection.query(dbQuery.project.update(body), (error, results, fields) => {
       if (error) throw new Error('Request Not Valid')
       httpMsgs.send200(response)
@@ -35,9 +34,7 @@ exports.update = function (request, response, body) {
 }
 
 exports.delete = function (request, response, body) {
-  console.log(body.id)
   if (!body.id) throw new Error('Input Not Valid')
-
   connection.query(dbQuery.project.delete(body.id), (error, results, fields) => {
     if (error) throw new Error('Request Not Valid')
     httpMsgs.send200(response)
