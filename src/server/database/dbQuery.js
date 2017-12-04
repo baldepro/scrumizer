@@ -47,12 +47,8 @@ exports.project = {
     sql += 'name="' + body.name + '", '
     sql += 'git_url="' + body.git + '", '
     sql += 'description="' + body.description + '" '
-
     sql = sql.replace(/,\s*$/, '')
-
     sql += 'WHERE id=' + body.id
-
-    console.log(sql)
 
     return sql
   },

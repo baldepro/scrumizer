@@ -8,7 +8,7 @@
     </div>
 
     <div ng-if="signupForm.show" id="sign-up-form" ng-click="closeForm($event)">
-        <form name="signup" novalidate>
+        <form name="signup" ng-submit="submitSignUpData()" novalidate>
             <div class="content">
                 <div class="row" ng-class="{'has-error': !signup.username.$pristine && signup.username.$invalid, 
                                             'has-success': !signup.username.$pristine && signup.username.$valid}" >
@@ -40,7 +40,7 @@
 
                 <div class="row">
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-                    <button class="btn btn-primary submit-btn" ng-click="submitSignUpData()" 
+                    <button class="btn btn-primary submit-btn" 
                             ng-disabled="signup.username.$invalid || signup.email.$invalid || signup.pwd.$invalid || signup.pwdBis.$invalid || !passwordsMatched">Submit</button>
                     <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
                 </div>

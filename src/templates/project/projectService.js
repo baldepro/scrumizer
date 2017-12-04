@@ -13,12 +13,7 @@ const projectServices = angular.module('services', [])
       data: { name: $scope.project.name, git: $scope.project.git, description: $scope.project.description, ownerName: $scope.project.ownerName }
     })
     .then((response) => {
-      $scope.projects.push({
-        name: $scope.project.name,
-        description: $scope.project.description,
-        git: $scope.project.git,
-        ownerName: $scope.project.ownerName
-      })
+      this.get($scope)
 
       $scope.projectCreationForm.show = false
       $scope.init()
@@ -32,6 +27,7 @@ const projectServices = angular.module('services', [])
       params: {ownerName: $scope.project.ownerName}
     })
     .then((response) => {
+      $scope.projects = []
       for (let i = 0; i < response.data.data.length; i++) {
         $scope.projects.push({
           id: response.data.data[i].id,
