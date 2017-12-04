@@ -15,10 +15,8 @@ const homeServices = angular.module('app.homeFactory', [])
         url: '/api/user/signup',
         data: { name: $scope.user.name, email: $scope.user.email, password: $scope.user.password }
       }).then((response) => {
-        if (response.data.success) $scope.showSignupForm = false
+        if (response.data.success) $scope.signupForm.show = false
         $scope.user.init()
-      }, (response) => {
-        console.log(response)
       })
     }
   }
