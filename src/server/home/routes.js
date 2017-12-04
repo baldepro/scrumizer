@@ -1,20 +1,13 @@
-var express = require('express')
-var router = express.Router()
-var mysql = require('mysql')
+const express = require('express')
+const router = express.Router()
+const user = require('../database/user')
 
-var db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'scrumdb'
+router.post('/signup', (request, response) => {
+  user.add(request, response, request.body)
 })
 
-db.connect((error) => {
-  if (error) {
-    console.log('Error for connection to data base')
-  } else {
-    console.log('Connection established with the database')
-  }
+router.post('/login', (request, response) => {
+  user.get(request, response, request.body)
 })
 
 router.put('/', (request, response) => {
@@ -24,4 +17,5 @@ router.put('/', (request, response) => {
 router.delete('/', (request, response) => {
   user.delete(request, response, request.body)
 })
+
 module.exports = router

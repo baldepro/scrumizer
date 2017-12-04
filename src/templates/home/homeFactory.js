@@ -2,7 +2,7 @@ import angular from 'angular'
 
 const homeServices = angular.module('app.homeFactory', [])
 
-.factory('signUpService', ['$http', '$location', function ($http, $location) {
+.service('signUpService', ['$http', '$location', function ($http, $location) {
   function areDataValid ($scope) {
     return $scope.user.name && $scope.user.password && $scope.user.email &&
            ($scope.user.password === $scope.user.passwordBis)
@@ -10,10 +10,11 @@ const homeServices = angular.module('app.homeFactory', [])
 
   return function ($scope) {
     if (areDataValid($scope)) {
+      console.log($scope)
       $http({
         method: 'POST',
         url: '/api/user/signup',
-        data: { name: $scope.user.name, email: $scope.user.email, password: $scope.user.password }
+        data: $scope.user
       }).then((response) => {
         if (response.data.success) $scope.signupForm.show = false
         $scope.user.init()

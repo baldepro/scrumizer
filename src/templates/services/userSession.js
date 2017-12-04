@@ -9,13 +9,12 @@ const userSessionService = angular.module('app.userSessionService', [])
     $http({
       method: 'POST',
       url: '/api/user/login',
-      data: { name: $scope.user.name, password: $scope.user.password }
+      data: $scope.user
     })
     .then(response => {
       if (response.data.success) {
         authToken.setToken(response.data.token)
         $scope.user.init()
-        console.log()
         let path = '/project/' + response.data.info.name
         $location.path(path)
       }
