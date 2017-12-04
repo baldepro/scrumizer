@@ -17,9 +17,10 @@ db.connect((error) => {
   }
 })
 
-router.post('/login', (req, res) => {
+router.get('/login', (req, res) => {
   let username = req.body.name
-  let sql = `SELECT * FROM user WHERE user.name='${username}'`
+  let password = req.body.password
+  let sql = `SELECT * FROM user WHERE user.name='${username}' and user.password='${password}'`
   db.query(sql, (err, result) => {
     if (err) throw err
     res.send(result)

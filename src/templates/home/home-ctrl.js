@@ -4,8 +4,8 @@ import angular from 'angular'
 var homeModule = angular.module('homeModule', [])
 
 homeModule.controller('homeCtrl',
-  ['$scope', 'signUpService', 'loginService',
-    function ($scope, signUpService, loginService) {
+  ['$scope', '$location', 'signUpService', 'loginService',
+    function ($scope, $location, signUpService, loginService) {
       $scope.signUpBtnActivated = false
       $scope.loginBtnActivated = false
 
@@ -46,6 +46,7 @@ homeModule.controller('homeCtrl',
         $scope.loginBtnActivated = false
         loginService($scope)
         $scope.user.init()
+        $location.path('/project/' + $scope.user.name)
       }
     }
   ])

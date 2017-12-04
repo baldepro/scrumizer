@@ -6,7 +6,7 @@ const homeServices = angular.module('app.homeFactory', [])
   return function ($scope) {
     $http({
       method: 'POST',
-      url: '/api/user/signup',
+      url: '/signup',
       data: { name: $scope.user.name, email: $scope.user.email, password: $scope.user.password }
     }).then((response) => {
 
@@ -18,12 +18,15 @@ const homeServices = angular.module('app.homeFactory', [])
 .service('loginService', ['$http', '$location', function ($http, $location) {
   return function ($scope) {
     $http({
-      method: 'POST',
-      url: '/api/user/login',
+      method: 'GET',
+      url: '/login',
       data: { name: $scope.user.name, password: $scope.user.password }
     })
     .then(response => {
-      console.log(response)
+      if(response.data !== null){
+        $scope.user.name = response.data[0].name
+      }
+      console.log(response.data[0].name)
     })
   }
 }])
