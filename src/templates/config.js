@@ -1,15 +1,12 @@
 import angular from 'angular'
-import homeModule from './home/home-ctrl'
-import homeServices from './home/home-factory'
-import projectServices from './project/service'
-import usServices from './us/serviceUs'
-import sprintServices from './sprint/service'
+import homeModule from './home/homeCtrl'
+import homeServices from './home/homeFactory'
+import projectServices from './project/projectService'
+import userSession from './services/userSession'
 import projectCtrl from './project/projectCtrl'
-import usCtrl from './us/usCtrl'
-import sprintCtrl from './sprint/sprintCtrl'
 import uiRouter from 'angular-ui-router'
 
-const app = angular.module('app', [uiRouter, homeModule.name, homeServices.name, projectCtrl.name, projectServices.name, usCtrl.name, usServices.name, sprintCtrl.name, sprintServices.name])
+const app = angular.module('app', [uiRouter, homeModule.name, homeServices.name, projectCtrl.name, projectServices.name, userSession.name])
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) => {
   $qProvider.errorOnUnhandledRejections(false)
@@ -23,7 +20,12 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) =
         .state('project', {
           url: '/project/:name',
           template: require('./project/project.html'),
-          controller: 'projectCtrl'
+          controller: 'projectCtrl',
+          resolve: ['$stateParams', '$location', 'loginService', function ($stateParams, $location, loginService) {
+            if (!loginService.isLoggedIn() && $stateParams.name !== undefined) {
+              $location.path('/')
+            }
+          }]
         })
         .state('us', {
           url: '/us/:project_id',

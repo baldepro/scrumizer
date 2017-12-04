@@ -1,6 +1,6 @@
 var express = require('express')
-var router  = express.Router()
-var mysql   = require('mysql')
+var router = express.Router()
+var mysql = require('mysql')
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -26,12 +26,8 @@ router.get('/login', (req, res) => {
     res.send(result)
   })
 })
-router.post('/sign-up', (req, res) => {
-  let sql = 'INSERT INTO user SET ?'
-  db.query(sql, req.body, (err, result) => {
-    if (err) throw err
-    console.log(result)
-    res.send('User created')
-  })
+
+router.delete('/', (request, response) => {
+  user.delete(request, response, request.body)
 })
 module.exports = router

@@ -1,80 +1,109 @@
-import _ from 'lodash'
 import angular from 'angular'
 
-var projectCtrlModule = angular.module('homeCtrlModule', [])
+const projectCtrlModule = angular.module('homeCtrlModule', [])
 
 .controller('projectCtrl',
-  ['$scope', '$location', 'createProjectService', 'getProjectsService', 'deleteProjectService', 'updateProjectService', 'getOneProjectsService',
-    function ($scope, $location, createProjectService, getProjectsService, deleteProjectService, updateProjectService, getOneProjectsService) {
+  ['$scope', 'projectService', '$stateParams', 'loginService', 'projectEventHandler',
+    function ($scope, projectService, $stateParams, loginService, projectEventHandler) {
       $scope.projects = []
 
-      getProjectsService($scope)
-
       $scope.project = {
+        id: '',
         name: '',
         description: '',
         git: '',
-        init: function () {
-          this.name = ' '
-          this.description = ' '
-          this.git = ' '
-        }
+        ownerName: $stateParams.name,
+        hasChanged: false
       }
 
-      $scope.createProjectBtnActivated = false
+      $scope.projectUpdate = undefined
 
-      $scope.clickCreateProjectBtn = function () {
-        $scope.createProjectBtnActivated = true
+      $scope.projectComparator = {}
+
+      $scope.projectCreationForm = {
+        show: false,
+        nameFormat: /^([a-z]|[A-Z])[a-zA-Z0-9 ]+$/
+        // gitFormat: /((git|ssh|http(s)?)|(git@[\w\.]+))(:(\/\/)?)([\w\.@\:/\-~]+)(\.git)(\/)?/
       }
 
-      $scope.clickCancelBtn = function () {
-        $scope.createProjectBtnActivated = false
+      $scope.showUpdateForm = false
+
+      $scope.init = function () {
+        $scope.project.id = ''
+        $scope.project.name = ''
+        $scope.project.description = ''
+        $scope.project.git = ''
+      }
+
+      projectService.get($scope)
+
+      $scope.logout = function () {
+        loginService.logout()
+      }
+
+      $scope.newProjectBtn = function () {
+        $scope.projectCreationForm.show = true
       }
 
       $scope.create = function () {
-        createProjectService($scope)
-        $scope.createProjectBtnActivated = false
+        projectService.create($scope)
       }
 
-      $scope.onEditClick = project => {
-        project.isEditing = true
-      }
-      $scope.onCancelClick = project => {
-        project.isEditing = false
+      $scope.closeForm = function ($event) {
+        projectEventHandler.closeForm($scope, $event)
       }
 
-      $scope.upadteProject = project => {
-        project.isEditing = false
-
-        if (project.updatedName !== undefined) project.name = project.updatedName
-        if (project.updatedDesc !== undefined) project.description = project.updatedDesc
-        if (project.updatedGit !== undefined) project.git = project.updatedGit
-
-        $scope.project.name = project.name
-        $scope.project.description = project.description
-        $scope.project.git = project.git
-
-        updateProjectService($scope)
+      $scope.clickCancelBtn = function () {
+        projectEventHandler.cancelBtn($scope)
       }
-      $scope.getBacklog = project => {
-        project.isEditing = false
-        $scope.proj = project
-        getOneProjectsService($scope, $location)
+
+      $scope.showProjectForm = function (project) {
+        $scope.projectUpdate = project
+        $scope.projectComparator.name = project.name
+        $scope.projectComparator.git = project.git
+        $scope.projectComparator.description = project.description
+
+        $scope.showUpdateForm = true
       }
-      $scope.deleteProject = projectToDelete => {
+
+      $scope.update = function () {
+        if ($scope.projectUpdate.name !== undefined && $scope.projectUpdate.name !== $scope.projectComparator.name) {
+          $scope.project.name = $scope.projectUpdate.name
+          $scope.project.hasChanged = true
+        } else {
+          $scope.project.name = $scope.projectComparator.name
+        }
+        if ($scope.projectUpdate.git !== $scope.projectComparator.git) {
+          $scope.project.git = $scope.projectUpdate.git === undefined ? '' : $scope.projectUpdate.git
+          $scope.project.hasChanged = true
+        } else {
+          $scope.project.git = $scope.projectComparator.git
+        }
+        if ($scope.projectUpdate.description !== $scope.projectComparator.description) {
+          $scope.project.description = ($scope.projectUpdate.description === undefined) ? '' : $scope.projectUpdate.description
+          $scope.project.hasChanged = true
+        } else {
+          $scope.project.description = $scope.projectComparator.description
+        }
+
+        if ($scope.project.hasChanged) {
+          $scope.project.id = $scope.projectUpdate.id
+          projectService.update($scope)
+        }
+
+        $scope.showUpdateForm = false
+      }
+
+      $scope.deleteProject = function (projectToDelete) {
+        $scope.project.id = projectToDelete.id
         $scope.project.name = projectToDelete.name
-        $scope.project.description = projectToDelete.description
         $scope.project.git = projectToDelete.git
+        $scope.project.description = projectToDelete.description
 
-        deleteProjectService($scope)
-
-        _.remove($scope.projects, project => (
-      project.name === projectToDelete.name &&
-      project.description === projectToDelete.description &&
-      project.git === projectToDelete.git
-    )
-  )
+        projectService.delete($scope)
       }
-    }])
+    }
+  ]
+)
 
 export default projectCtrlModule
