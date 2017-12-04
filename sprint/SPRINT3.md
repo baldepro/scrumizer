@@ -13,7 +13,7 @@ Sprint 3 : ce sprint dure 2 semaines et commence le 04/12/2017
 |US |Description|Etat|
 |:-:|:----------|:---|
 |US3|En tant qu'*utilisateur*, j'aimerai pouvoir ajouter une user story dans un sprint.|Todo|
-|US2|En tant qu'*utilisateur*, j'aimerai pouvoir me déconnecter de l'application.||Todo|
+|US2|En tant qu'*utilisateur*, j'aimerai pouvoir me déconnecter de l'application.|Todo|
 |US6|En tant que *membre* d'un projet, j'aimerai pouvoir ajouter un utilisateur au projet en spécifiant son nom d'utilisateur.|Todo|
 |US7|En tant que *membre* d'un projet, j'aimerai pouvoir mettre fin à ma contribution à ce projet.|Todo|
 |US14|En tant que *membre* d'un projet, j'aimerai pouvoir créer une liste de tâches à réaliser au sein d'un sprint en spécifiant sa description et les user stories qui lui sont associées.|Todo|
