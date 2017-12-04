@@ -6,8 +6,8 @@
     "start": "node ./bin/www",
     "install": "node install_modules",
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
-    "prod": "webpack ",
-    "test": "webdriver-management start && protractor src/E2E-Tests/conf.js"
+    "prod": "webpack "
+    //"test": "webdriver-management start && protractor src/E2E-Tests/conf.js"
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
