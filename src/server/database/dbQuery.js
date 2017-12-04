@@ -30,28 +30,34 @@ exports.user = {
 
 exports.project = {
   get: function (body) {
-    return 'SELECT * FROM scrumdb.project WHERE name="' + body.name + '"'
+    let sql = 'SELECT * FROM scrumdb.project WHERE creator_id=(SELECT id FROM scrumdb.user WHERE name="' + body.ownerName + '")'
+    return sql
   },
 
   add: function (body) {
-    let sql = 'INSERT INTO scrumdb.project (name, git_url, description, creator_id) VALUES'
-    sql += util.format('("%s", "%s", "%s", %d)', body.name, body.gitUrl, body.description, body.creatorId)
+    let sql = 'INSERT INTO scrumdb.project (name, git_url, description, creator_id)'
+    sql += util.format('SELECT "%s", "%s", "%s", ', body.name, body.git, body.description)
+    sql += 'id   FROM scrumdb.user  WHERE name="' + body.ownerName + '"'
     return sql
   },
 
   update: function (body) {
     let sql = 'UPDATE scrumdb.project SET '
 
-    if (body.name) sql += 'name="' + body.name + '", '
-    if (body.gitUrl) sql += 'git_url="' + body.gitUrl + '", '
-    if (body.description) sql += 'description="' + body.decription + '", '
+    sql += 'name="' + body.name + '", '
+    sql += 'git_url="' + body.git + '", '
+    sql += 'description="' + body.description + '" '
 
-    sql += 'WHERE id="' + body.id + '"'
+    sql = sql.replace(/,\s*$/, '')
+
+    sql += 'WHERE id=' + body.id
+
+    console.log(sql)
 
     return sql
   },
 
   delete: function (id) {
-    return 'DELETE FROM scrumdb.project WHERE id="' + id + '"'
+    return 'DELETE FROM scrumdb.project WHERE id=' + id
   }
 }

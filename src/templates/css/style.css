@@ -1,5 +1,6 @@
 html, body, .container {
     height: 100vh;
+    min-height: 500px;
 }
 
 /**---------------------------------------------------------
@@ -62,113 +63,227 @@ html, body, .container {
 /**---------------------------------------------------------
  *  Sign up Form &  Login Form
  **--------------------------------------------------------*/
-
- /* Full-width input fields */
-input[type=text], input[type=password], textarea {
-    min-height: 30px;
-    min-width: 300px;
-    width: 40%;
-    height: 10%;
-    padding: 12px 20px;
-    margin: 30px 0;
-    display: block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    position: relative;
+#sign-up-form, #login-form, #create-project-form {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
 }
 
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    position: relative;
+form {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  height: 60%;
+  min-width: 550px;
+  min-height: 600px;
+  background-color: white;
 }
 
-/* The Modal (background) */
-.modal {
-    display: block; /* Hidden by default */
-    position: absolute; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: hidden; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
+#login-form form {
+  height: 30%;
+  min-height: 400px;
 }
 
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
-    min-height: 300px;
-    background-color: bleu;
-    position: relative;
-    border: 1px solid red;
+.content {
+  position: relative; 
+  width: 100%;
+  min-width: 550px;
+  height: 100%;
+  padding: 5%;
 }
 
-/* The Close Button (x) */
-.close {
-    position: absolute;
-    right: 35px;
-    top: 15px;
-    color: #000;
-    font-size: 40px;
-    font-weight: bold;
+.row {
+  height: 80px;
+  min-height: 60px;
 }
 
-.close:hover,
-.close:focus {
-    color: red;
-    cursor: pointer;
+.row, .form-help {
+  width: 100%;
+  margin: 20px auto;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-    .cancelbtn, .signupbtn {
-       width: 100%;
-    }
+.form-help {
+  color: red;
+  font-size: 18px;
 }
 
-.submit-btn, .cancel-btn {
-  width: 20%;
+.row > button {
+  background-color: rgb(61, 85, 124);
+  min-width: 70px;
+  width: 47%;
   height: 50px;
+  border-radius: 5px;
+}
+.row > .glyphicon-remove {
+  color: red;
 }
 
-.form-control {
-  width: 40%;
+.row > .glyphicon-ok {
+  color: green;
 }
 
+.row > label {
+  font-style: italic;
+}
+
+input {
+  width: 100%;
+  height: 60%;
+  padding: 10px;
+}
+
+.has-error {
+  color: red;
+}
+
+.has-error input {
+  border: 1px solid red;
+}
+
+.has-success {
+  color: green;
+}
+
+.has-success input {
+  border: 1px solid green;
+}
 
 /**---------------------------------------------------------
  *  Project page
  **--------------------------------------------------------*/
 
-table {
+table{
   width: 100%;
+  clear: both;
 }
-.create-project-btn {
+
+td {
+}
+tr, th, td {
+  min-height: 40px;
+  height: 50px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.action {
+  text-align: center;
+}
+
+
+.header {
+  box-shadow: 2px 3px 3px #888888;
+  padding: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.logo-min {
+  float: left;
+  position: relative;
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+  color: #39393a;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 24;
+  letter-spacing: .3px;
+  line-height: 1;
+  text-shadow: #EDEDED 1px 1px 0;
+  padding: 6px;
+  border: 1px solid black;
+  border-radius: 3px 6px;
+  box-shadow: 2px 3px 3px #888888;
+}
+
+.logo-min::after {
+  content:"scrumizer";
+  position: absolute;
+  left: 5px;
+  top: 4px;
+}
+.logo-min::after {
+  background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
+  background-size: 4px 4px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: -5;
+  display: block;
+  text-shadow: none;
+}
+
+.logout {
   float: right;
-  background-color: #14a86f;
+  text-decoration: none;
+}
+
+.logout:hover {
+  text-decoration: none;
+}
+
+.btn-container {
+  width: 100%;
+  background-color: black;
+}
+
+.create-project-btn {
+  margin: 10px 0;
+  float: right;
+  background-color: rgb(152, 219, 142);
+  border: 0;
 }
 .create-project-btn::after {
   clear: both;
 }
 
-.edit-project-btn {
-  background-color: #38a8ed;
+.create-project-btn:hover {
+  background-color: rgb(116, 244, 66);
 }
-.delete-project-btn {
-  background-color: #e52222;
+
+.edit-btn {
+  background-color: rgb(28, 109, 239);
+  color: white;
+  border: 0;
 }
+
+.edit-btn:hover {
+  background-color: rgb(28, 109, 240);
+  color: white;
+}
+
+.delete-btn {
+  background-color: rgb(249, 37, 48);
+  color: white;
+  border: 0;
+}
+
+.delete-btn:hover {
+  background-color: rgb(250, 37, 48);
+  color: white;
+}
+
+textarea {
+  height: 100px;
+  width: 100%;
+}
+
+#create-project-form button {
+  position: relative;
+  margin-top: 60px;
+  width: 49.6%;
+  min-width: 200px;
+}
+
+
+
+
+
 
 
 

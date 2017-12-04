@@ -10,11 +10,11 @@ router.post('/login', (request, response) => {
   user.get(request, response, request.body)
 })
 
-router.post('/update', (request, response) => {
+router.put('/', (request, response) => {
   user.update(request, response, request.body)
 })
 
-router.post('/delete', (request, response) => {
+router.delete('/', (request, response) => {
   user.delete(request, response, request.body)
 })
 

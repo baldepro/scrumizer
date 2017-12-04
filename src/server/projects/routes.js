@@ -2,20 +2,20 @@ var express = require('express')
 var router = express.Router()
 const project = require('../database/project')
 
-router.get('/get/:name:creator_id', (request, response) => {
-  project.get(request, response, request.params)
+router.get('/', (request, response) => {
+  project.get(request, response, request.query)
 })
 
-router.post('/add', (request, response) => {
+router.post('/', (request, response) => {
   project.add(request, response, request.body)
 })
 
-router.put('/', (req, res) => {
-
+router.put('/', (request, response) => {
+  project.update(request, response, request.body)
 })
 
-router.delete('/', (req, res) => {
-
+router.delete('/', (request, response) => {
+  project.delete(request, response, request.query)
 })
 
 module.exports = router
