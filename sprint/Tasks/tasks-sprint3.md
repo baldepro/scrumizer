@@ -5,7 +5,7 @@ A propos :
 ----------
 Scrumizer est une application web de gestion de projet utilisant scrum.
 
-Sprint 2 : ce sprint dure 2 semaines et commence le 20/11/2017
+Sprint 3 : ce sprint dure 2 semaines et commence le 04/12/2017
 ---------
 
 |ID |Description|affecté|Etat|
