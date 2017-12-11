@@ -9,6 +9,7 @@
     "prod": "webpack "
   },
   "dependencies": {
+    "angular-animate": "^1.6.7",
     "bcrypt": "^1.0.3",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",

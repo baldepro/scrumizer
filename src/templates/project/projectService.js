@@ -1,16 +1,22 @@
 import angular from 'angular'
 import _ from 'lodash'
 
-const projectServices = angular.module('services', [])
+const projectServices = angular.module('app.projectFactory', [])
 
-.factory('projectService', function ($http) {
+.factory('projectService', function ($http, $location) {
   let projectFactory = {}
 
   projectFactory.create = function ($scope) {
     $http({
       method: 'POST',
       url: '/api/project',
-      data: { name: $scope.project.name, git: $scope.project.git, description: $scope.project.description, ownerName: $scope.project.ownerName }
+      data: {
+        name: $scope.project.name,
+        git: $scope.project.git,
+        description: $scope.project.description,
+        ownerName: $scope.project.ownerName,
+        ownerRole: $scope.project.ownerRole
+      }
     })
     .then((response) => {
       this.get($scope)
@@ -65,6 +71,10 @@ const projectServices = angular.module('services', [])
         project.git === $scope.project.git
       ))
     })
+  }
+
+  projectFactory.openProject = function (project) {
+    $location.path('/us/' + project.id)
   }
 
   return projectFactory

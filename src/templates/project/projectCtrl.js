@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-const projectCtrlModule = angular.module('homeCtrlModule', [])
+const projectCtrlModule = angular.module('app.projectModule', [])
 
 .controller('projectCtrl',
   ['$scope', 'projectService', '$stateParams', 'loginService', 'projectEventHandler',
@@ -13,6 +13,7 @@ const projectCtrlModule = angular.module('homeCtrlModule', [])
         description: '',
         git: '',
         ownerName: $stateParams.name,
+        ownerRole: '',
         hasChanged: false
       }
 
@@ -28,6 +29,8 @@ const projectCtrlModule = angular.module('homeCtrlModule', [])
 
       $scope.showUpdateForm = false
 
+      projectService.get($scope)
+
       $scope.init = function () {
         $scope.project.id = ''
         $scope.project.name = ''
@@ -35,10 +38,12 @@ const projectCtrlModule = angular.module('homeCtrlModule', [])
         $scope.project.git = ''
       }
 
-      projectService.get($scope)
-
       $scope.logout = function () {
         loginService.logout()
+      }
+
+      $scope.openProject = function (project) {
+        projectService.openProject(project)
       }
 
       $scope.newProjectBtn = function () {

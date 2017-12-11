@@ -7,6 +7,13 @@ const jwt = require('jsonwebtoken')
 
 const connection = mysql.createConnection(dbSettings.dbConfig)
 
+exports.getUsers = function (request, response) {
+  connection.query(dbQuery.user.getAll(), (error, results, fields) => {
+    if (error) throw new Error('Request Not Valid')
+    httpMsgs.sendData(response, results)
+  })
+}
+
 exports.get = function (request, response, body) {
   if (!body.name && !body.password) throw new Error('Input Not Valid')
   connection.query(dbQuery.user.get(body.name), (error, results, fields) => {
@@ -26,7 +33,7 @@ exports.add = function (request, response, body) {
 
   connection.query(dbQuery.user.add(body), (error, results, fields) => {
     if (error) httpMsgs.send504(response, error)
-    else httpMsgs.send200(response)
+    httpMsgs.send200(response)
   })
 }
 
