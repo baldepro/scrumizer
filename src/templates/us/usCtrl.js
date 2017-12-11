@@ -1,9 +1,9 @@
 import angular from 'angular'
 
-const usCtrl = angular.module('usModule', [])
+const usCtrl = angular.module('app.usModule', [])
 
-.controller('usCtrl', ['$scope', '$stateParams', 'usService',
-  function ($scope, $stateParams, usService) {
+.controller('usCtrl', ['$scope', '$stateParams', 'usFactory',
+  function ($scope, $stateParams, usFactory) {
     $scope.userStories = []
 
     $scope.projectId = $stateParams.projectId
@@ -39,7 +39,7 @@ const usCtrl = angular.module('usModule', [])
       status: undefined
     }
 
-    usService.get($scope)
+    usFactory.get($scope)
 
     $scope.newUsBtn = function () {
       $scope.usCreationForm.show = true
@@ -50,7 +50,7 @@ const usCtrl = angular.module('usModule', [])
     }
 
     $scope.create = function () {
-      usService.create($scope)
+      usFactory.create($scope)
     }
 
     $scope.showDetails = function (userStory) {
@@ -77,7 +77,7 @@ const usCtrl = angular.module('usModule', [])
       $scope.us.priority = userStory.priority
       $scope.us.points = userStory.points
       $scope.us.status = userStory.status
-      usService.delete($scope)
+      usFactory.delete($scope)
     }
 
     $scope.cancelUpdate = function () {
@@ -100,7 +100,7 @@ const usCtrl = angular.module('usModule', [])
       }
       $scope.us.id = $scope.usComparator.id
 
-      usService.update($scope)
+      usFactory.update($scope)
     }
   }])
 

@@ -1,30 +1,29 @@
 import angular from 'angular'
 
-const homeServices = angular.module('app.homeFactory', [])
+const homeServices = angular.module('app.homeService', [])
 
 .service('signUpService', ['$http', '$location', function ($http, $location) {
-  function areDataValid ($scope) {
-    return $scope.user.name && $scope.user.password && $scope.user.email &&
-           ($scope.user.password === $scope.user.passwordBis)
+  function areDataValid (data) {
+    return data.user.name && data.user.password && data.user.email &&
+           (data.user.password === data.user.passwordBis)
   }
 
   return function ($scope) {
     if (areDataValid($scope)) {
-      console.log($scope)
       $http({
         method: 'POST',
         url: '/api/user/signup',
         data: $scope.user
       }).then((response) => {
         if (response.data.success) $scope.signupForm.show = false
-        $scope.user.init()
+        $scope.init()
       })
     }
   }
 }])
 
-.factory('eventHandler', [function () {
-  var eventHandlerFactory = {}
+.factory('eventHandler', function () {
+  let eventHandlerFactory = {}
 
   eventHandlerFactory.clickLoginBtn = function ($scope) {
     $scope.loginForm.show = true
@@ -37,7 +36,7 @@ const homeServices = angular.module('app.homeFactory', [])
   eventHandlerFactory.clickCancelBtn = function ($scope) {
     $scope.signupForm.show = false
     $scope.loginForm.show = false
-    $scope.user.init()
+    $scope.init()
   }
 
   eventHandlerFactory.clickCloseForm = function ($scope, $event) {
@@ -49,6 +48,6 @@ const homeServices = angular.module('app.homeFactory', [])
   }
 
   return eventHandlerFactory
-}])
+})
 
 export default homeServices

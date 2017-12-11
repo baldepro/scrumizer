@@ -1,6 +1,6 @@
 import angular from 'angular'
 
-const header = angular.module('app.headerDirective', [])
+const header = angular.module('app.appDirectives', [])
 
 header.controller('menuCtrl', ['$scope', '$location', '$stateParams', 'loginService',
   function ($scope, $location, $stateParams, loginService) {
@@ -28,6 +28,7 @@ header.controller('menuCtrl', ['$scope', '$location', '$stateParams', 'loginServ
       $location.path()
     }
   }])
+
 header.directive('header', function () {
   return {
     restrict: 'E',

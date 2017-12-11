@@ -1,7 +1,7 @@
 import angular from 'angular'
-const usServices = angular.module('app.usFactory', [])
+const usServices = angular.module('app.usService', [])
 
-.factory('usService', function ($http) {
+.factory('usFactory', function ($http) {
   let usFactory = {}
 
   usFactory.get = function ($scope) {

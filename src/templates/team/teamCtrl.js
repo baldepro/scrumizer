@@ -2,7 +2,7 @@ import angular from 'angular'
 
 const teamCtrl = angular.module('teamModule', [])
 
-teamCtrl.controller('teamCtrl', ['$scope', 'teamService', function ($scope, teamService) {
+teamCtrl.controller('teamCtrl', ['$scope', 'teamFactory', function ($scope, teamFactory) {
   $scope.UsersList = []
 
   $scope.user = {
@@ -24,10 +24,10 @@ teamCtrl.controller('teamCtrl', ['$scope', 'teamService', function ($scope, team
     role: ''
   }
 
-  teamService.get($scope)
+  teamFactory.get($scope)
 
   $scope.newMemberBtn = function () {
-    teamService.getUsers($scope)
+    teamFactory.getUsers($scope)
     $scope.addMember = true
   }
 
@@ -51,8 +51,12 @@ teamCtrl.controller('teamCtrl', ['$scope', 'teamService', function ($scope, team
   $scope.addNewMember = function (user) {
     $scope.newMember.name = user
     $scope.newMember.role = 'developer'
-    teamService.create($scope)
-    $scope.addMember = false
+    teamFactory.create($scope)
+  }
+
+  $scope.deleteMember = function (member) {
+    $scope.newMember.name = member
+    teamFactory.delete($scope)
   }
 }])
 

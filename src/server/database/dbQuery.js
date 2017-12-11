@@ -82,19 +82,13 @@ exports.member = {
   },
 
   update: function (body) {
-    let sql = 'UPDATE scrumdb.project SET '
-
-    sql += 'name="' + body.name + '", '
-    sql += 'git_url="' + body.git + '", '
-    sql += 'description="' + body.description + '" '
-    sql = sql.replace(/,\s*$/, '')
-    sql += 'WHERE id=' + body.id
-
+    let sql = 'UPDATE scrumdb.user_has_project SET '
+    sql += 'user_role="' + body.userRole + '" '
     return sql
   },
 
-  delete: function (id) {
-    return 'DELETE FROM scrumdb.project WHERE id=' + id
+  delete: function (body) {
+    return 'DELETE FROM scrumdb.user_has_project WHERE id=(SELECT id FROM scrumdb.user WHERE name="' + body.username + '") AND project_id=' + body.projectId
   }
 }
 
@@ -127,5 +121,29 @@ exports.userStory = {
 
   delete: function (id) {
     return 'DELETE FROM scrumdb.user_story WHERE id=' + id
+  }
+}
+
+exports.sprint = {
+  get: function (body) {
+    return 'SELECT * FROM scrumdb.sprint WHERE project_id=' + body.projectId
+  },
+
+  add: function (body) {
+    let sql = 'INSERT INTO scrumdb.sprint (start_time, end_time, project_id)  VALUES '
+    sql += util.format('("%s", "%s", %d ', body.start, body.end, body.projectId) + ')'
+    return sql
+  },
+
+  update: function (body) {
+    let sql = 'UPDATE scrumdb.sprint SET '
+    if (body.start) sql += 'start_time="' + body.start + '", '
+    if (body.end) sql += 'end_time="' + body.end + '" '
+    sql += 'WHERE id=' + body.id
+    return sql
+  },
+
+  delete: function (id) {
+    return 'DELETE FROM scrumdb.sprint WHERE id=' + id
   }
 }

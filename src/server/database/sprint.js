@@ -5,26 +5,25 @@ const httpMsgs = require('./httpMsgs')
 
 const connection = mysql.createConnection(dbSettings.dbConfig)
 
-exports.getMembers = function (request, response, body) {
+exports.get = function (request, response, body) {
   if (!body.projectId) throw new Error('Input Not Valid')
-  connection.query(dbQuery.member.getAll(body), (error, results, fields) => {
+  connection.query(dbQuery.sprint.get(body), (error, results, fields) => {
     if (error) throw new Error('Request Not Valid')
     httpMsgs.sendData(response, results)
   })
 }
 
 exports.add = function (request, response, body) {
-  if (!body.username && !body.userRole && !body.projectId) throw new Error('Input Not Valid')
-  connection.query(dbQuery.member.add(body), (error, results, fields) => {
+  if (!body.start && !body.end && !body.projectId) throw new Error('Input Not Valid')
+  connection.query(dbQuery.sprint.add(body), (error, results, fields) => {
     if (error) throw new Error('Request Not Valid')
-    httpMsgs.send200(response)
   })
 }
 
 exports.update = function (request, response, body) {
   try {
-    if (!body.username && !body.projectId && !body.userRole) throw new Error('Input Not Valid')
-    connection.query(dbQuery.member.update(body), (error, results, fields) => {
+    if (!body.id) throw new Error('Input Not Valid')
+    connection.query(dbQuery.sprint.update(body), (error, results, fields) => {
       if (error) throw new Error('Request Not Valid')
       httpMsgs.send200(response)
     })
@@ -34,8 +33,8 @@ exports.update = function (request, response, body) {
 }
 
 exports.delete = function (request, response, body) {
-  if (!body.username && !body.projectId) throw new Error('Input Not Valid')
-  connection.query(dbQuery.member.delete(body), (error, results, fields) => {
+  if (!body.id) throw new Error('Input Not Valid')
+  connection.query(dbQuery.sprint.delete(body.id), (error, results, fields) => {
     if (error) throw new Error('Request Not Valid')
     httpMsgs.send200(response)
   })

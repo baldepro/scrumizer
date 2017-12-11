@@ -15,6 +15,7 @@ router.put('/', (request, response) => {
 })
 
 router.delete('/', (request, response) => {
+  member.delete(request, response, request.query)
 })
 
 module.exports = router

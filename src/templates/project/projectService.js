@@ -1,9 +1,9 @@
 import angular from 'angular'
 import _ from 'lodash'
 
-const projectServices = angular.module('app.projectFactory', [])
+const projectServices = angular.module('app.projectService', [])
 
-.factory('projectService', function ($http, $location) {
+.factory('projectFactory', function ($http, $location) {
   let projectFactory = {}
 
   projectFactory.create = function ($scope) {

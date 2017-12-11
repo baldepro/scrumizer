@@ -3,8 +3,8 @@ import angular from 'angular'
 const projectCtrlModule = angular.module('app.projectModule', [])
 
 .controller('projectCtrl',
-  ['$scope', 'projectService', '$stateParams', 'loginService', 'projectEventHandler',
-    function ($scope, projectService, $stateParams, loginService, projectEventHandler) {
+  ['$scope', 'projectFactory', '$stateParams', 'loginService', 'projectEventHandler',
+    function ($scope, projectFactory, $stateParams, loginService, projectEventHandler) {
       $scope.projects = []
 
       $scope.project = {
@@ -29,7 +29,7 @@ const projectCtrlModule = angular.module('app.projectModule', [])
 
       $scope.showUpdateForm = false
 
-      projectService.get($scope)
+      projectFactory.get($scope)
 
       $scope.init = function () {
         $scope.project.id = ''
@@ -43,7 +43,7 @@ const projectCtrlModule = angular.module('app.projectModule', [])
       }
 
       $scope.openProject = function (project) {
-        projectService.openProject(project)
+        projectFactory.openProject(project)
       }
 
       $scope.newProjectBtn = function () {
@@ -51,7 +51,7 @@ const projectCtrlModule = angular.module('app.projectModule', [])
       }
 
       $scope.create = function () {
-        projectService.create($scope)
+        projectFactory.create($scope)
       }
 
       $scope.closeForm = function ($event) {
@@ -93,7 +93,7 @@ const projectCtrlModule = angular.module('app.projectModule', [])
 
         if ($scope.project.hasChanged) {
           $scope.project.id = $scope.projectUpdate.id
-          projectService.update($scope)
+          projectFactory.update($scope)
         }
 
         $scope.showUpdateForm = false
@@ -105,7 +105,7 @@ const projectCtrlModule = angular.module('app.projectModule', [])
         $scope.project.git = projectToDelete.git
         $scope.project.description = projectToDelete.description
 
-        projectService.delete($scope)
+        projectFactory.delete($scope)
       }
     }
   ]
