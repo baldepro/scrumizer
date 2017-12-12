@@ -19,7 +19,7 @@ Sprint 3 : ce sprint dure 2 semaines et commence le 04/12/2017
 |#T7|Dans src/server/task/routes.js créer une route qui permet d'ajouter un tuple dans la table "user_story_has_sprint", |Cheikh|Todo|
 |#T8|Creer un dossier nomme team dans /src/templates/ et dans ce dossier créer un fichier team.html dans lequel on aura un formulaire permettant d'ajouter un nouveau membre a un projet dans ce forumalire on aura un champ user login et un champ role qui definit le role de l'utilisateur dans le projet  Sprint_has_US qui contient 3 colonnes project_id,sprint_id,sprint_id et un tableau qui permet d'afficher les membres du projet|no one|Todo|
 |#T9|Creer un fichier nomme teamService.js dans ce fichier créer un service addNewMember qui permet d'ajouter un nouveau membre a un projet , créer un service nomme revokFromProject qui permet a un utilisateur de se revoquer a un projet , créer un service nomme getMember qui permet de recuperer les membres d'un projet |no one|Todo|
-|#T10|Creer le fichier nommme TeamCtrl dans ce fichier créer les fonctions addMember,getMembers,revokMemberFromProject.   |no one|Todo|
+|#T10|Creer le fichier nommme TeamCtrl dans ce fichier créer les fonctions addMember,getMembers,revokMemberFromProject.   |Cheikh|Todo|
 |#T11|Dans src/server/team/routes.js créer une route qui permet d'ajouter un tuple dans la table "user_has_project" , créer une route qui permet de supprimer un tuple dans la table "user_has_project", créer une route qui permet de recuperer les tuples de la tables user_has_project avec le parametre project_id,créer  |no one|Todo|
 
 
