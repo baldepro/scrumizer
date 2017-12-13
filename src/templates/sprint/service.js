@@ -1,5 +1,5 @@
 import angular from 'angular'
-var sprintServices = angular.module('sprintServices', [])
+var sprintServices = angular.module('app.sprintFactory', [])
 
 .service('createSprintService', function ($http) {
   return function ($scope) {

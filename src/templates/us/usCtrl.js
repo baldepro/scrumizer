@@ -1,102 +1,107 @@
-import _ from 'lodash'
 import angular from 'angular'
 
-var usCtrl = angular.module('usCtrl', [])
+const usCtrl = angular.module('app.usModule', [])
 
-.controller('usCtrl',
-  ['$scope', '$stateParams', '$location', 'createUsService', 'getUsService', 'deleteUsService', 'updateUsService',
-    function ($scope, $stateParams, $location, createUsService, getUsService, deleteUsService, updateUsService) {
-      $scope.us = []
-      $scope.createUsBtnActivated = false
-      $scope.idProject = $stateParams.project_id
-      $scope.clickCreateUsBtn = function () {
-        $scope.createUsBtnActivated = true
+.controller('usCtrl', ['$scope', '$stateParams', 'usFactory',
+  function ($scope, $stateParams, usFactory) {
+    $scope.userStories = []
+
+    $scope.projectId = $stateParams.projectId
+
+    $scope.us = {
+      description: '',
+      priority: 'low',
+      points: 1,
+      status: 'todo'
+    }
+
+    $scope.usCreationForm = {
+      show: false,
+      descriptionFormat: /^([a-z]|[A-Z])[a-zA-Z0-9 ]+$/
+    }
+
+    $scope.usDetails = {
+      show: false,
+      id: undefined,
+      description: '',
+      priority: undefined,
+      points: undefined,
+      status: undefined
+    }
+
+    $scope.isEditing = false
+
+    $scope.usComparator = {
+      id: undefined,
+      description: '',
+      priority: undefined,
+      points: undefined,
+      status: undefined
+    }
+
+    usFactory.get($scope)
+
+    $scope.newUsBtn = function () {
+      $scope.usCreationForm.show = true
+    }
+
+    $scope.clickCancelBtn = function () {
+      $scope.usCreationForm.show = false
+    }
+
+    $scope.create = function () {
+      usFactory.create($scope)
+    }
+
+    $scope.showDetails = function (userStory) {
+      $scope.usDetails.show = true
+      $scope.usDetails.id = userStory.id
+      $scope.usDetails.description = userStory.description
+      $scope.usDetails.priority = userStory.priority
+      $scope.usDetails.points = userStory.points
+      $scope.usDetails.status = userStory.status
+    }
+
+    $scope.editUs = function () {
+      $scope.isEditing = true
+      $scope.usComparator.id = $scope.usDetails.id
+      $scope.usComparator.description = $scope.usDetails.description
+      $scope.usComparator.priority = $scope.usDetails.priority
+      $scope.usComparator.points = $scope.usDetails.points
+      $scope.usComparator.status = $scope.usDetails.status
+    }
+
+    $scope.deleteUs = function (userStory) {
+      $scope.us.id = userStory.id
+      $scope.us.description = userStory.description
+      $scope.us.priority = userStory.priority
+      $scope.us.points = userStory.points
+      $scope.us.status = userStory.status
+      usFactory.delete($scope)
+    }
+
+    $scope.cancelUpdate = function () {
+      $scope.isEditing = false
+    }
+
+    $scope.updateUs = function (usDetails) {
+      $scope.isEditing = false
+      if ($scope.usComparator.description !== $scope.usDetails.description) {
+        $scope.us.description = $scope.usComparator.description
       }
-      $scope.clickCancelBtn = function () {
-        $scope.createUsBtnActivated = false
+      if ($scope.usComparator.priority !== $scope.usDetails.priority) {
+        $scope.us.priority = $scope.usComparator.priority
       }
-
-      getUsService($scope)
-
-      $scope.oneUs = {
-        id: '',
-        description: '',
-        priority: '',
-        cost: '',
-        states: '',
-        project_id: '',
-        init: function () {
-          this.id = ''
-          this.description = ' '
-          this.priority = ' '
-          this.cost = ' '
-          this.states = ' '
-          this.project_id = ' '
-        }
+      if ($scope.usComparator.points !== $scope.usDetails.points) {
+        $scope.us.points = $scope.usComparator.points
       }
-      $scope.clickSprint = function () {
-        $location.path('/sprint/' + $stateParams.project_id)
+      if ($scope.usComparator.status !== $scope.usDetails.status) {
+        $scope.us.status = $scope.usComparator.status
       }
+      $scope.us.id = $scope.usComparator.id
 
-      $scope.clickBacklog = function () {
-        $location.path('/us/' + $stateParams.project_id)
-      }
-
-      $scope.create = function () {
-        while ($scope.us.length !== 0) {
-          $scope.us.splice(0, 1)
-        }
-        createUsService($scope)
-        getUsService($scope)
-        $scope.createUsBtnActivated = false
-      }
-
-      $scope.onEditClick = us => {
-        us.isEditing = true
-      }
-
-      $scope.onCancelClick = us => {
-        us.isEditing = false
-      }
-
-      $scope.upadteUs = us => {
-        us.isEditing = false
-
-        if (us.updatedDesc !== undefined) us.description = us.updatedDesc
-        if (us.updatedPriority !== undefined) us.priority = us.updatedPriority
-        if (us.updatedPoints !== undefined) us.cost = us.updatedPoints
-        if (us.updatedStatus !== undefined) us.states = us.updatedStatus
-        // if (us.updatedProjectId !== undefined) us.project_id = us.updatedProjectId
-
-        $scope.oneUs.id = us.id
-        $scope.oneUs.description = us.description
-        $scope.oneUs.priority = us.priority
-        $scope.oneUs.cost = us.cost
-        $scope.oneUs.states = us.states
-        $scope.oneUs.projectId = us.project_id
-
-        updateUsService($scope)
-      }
-
-      $scope.deleteUs = usToDelete => {
-        $scope.oneUs.id = usToDelete.id
-        $scope.oneUs.description = usToDelete.description
-        $scope.oneUs.priority = usToDelete.priority
-        $scope.oneUs.cost = usToDelete.cost
-        $scope.oneUs.states = usToDelete.states
-        $scope.oneUs.projectId = usToDelete.project_id
-
-        deleteUsService($scope)
-
-        _.remove($scope.us, usy => (
-        usy.priority === usToDelete.priority &&
-        usy.description === usToDelete.description &&
-        usy.cost === usToDelete.cost &&
-        usy.states === usToDelete.states &&
-        usy.projectId === usToDelete.projectId
-      )
-        )
-      }
-    }])
+      usFactory.update($scope)
+    }
+  }])
 
 export default usCtrl

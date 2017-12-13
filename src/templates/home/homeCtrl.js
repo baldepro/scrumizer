@@ -1,7 +1,7 @@
 
 import angular from 'angular'
 
-var homeModule = angular.module('homeModule', [])
+var homeModule = angular.module('app.homeModule', [])
 
 homeModule.controller('homeCtrl',
   ['$scope', 'signUpService', 'loginService', 'eventHandler', function ($scope, signUpService, loginService, eventHandler) {
@@ -21,16 +21,17 @@ homeModule.controller('homeCtrl',
       name: '',
       email: '',
       password: '',
-      passwordBis: '',
-      init: function () {
-        this.name = ''
-        this.email = ''
-        this.password = ''
-        this.passwordBis = ''
-      }
+      passwordBis: ''
     }
 
     $scope.showLoginMsgError = false
+
+    $scope.init = function () {
+      $scope.user.name = ''
+      $scope.user.email = ''
+      $scope.user.password = ''
+      $scope.user.passwordBis = ''
+    }
 
     $scope.clickSignUpBtn = function () {
       eventHandler.clickSignupBtn($scope)

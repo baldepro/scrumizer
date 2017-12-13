@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import angular from 'angular'
 
-var sprintCtrl = angular.module('sprintCtrl', [])
+const sprintCtrl = angular.module('sprintCtrl', [])
 
 .controller('sprintCtrl',
   ['$scope', '$stateParams', '$location', 'createSprintService', 'getSprintService', 'deleteSprintService', 'updateSprintService', 'getUsOfSprintService', 'getTasksOfSprintService',

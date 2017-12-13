@@ -1,12 +1,21 @@
 html, body, .container {
     height: 100vh;
     min-height: 500px;
+    padding: 0;
+}
+p {
+  margin: 30px 0;
+}
+a, a:hover {
+  text-decoration: none;
+}
+.container-fluid {
+  width: 100%;
 }
 
 /**---------------------------------------------------------
  *  Home page
  **--------------------------------------------------------*/
-
 #logo {
   font-family: 'Open Sans', sans-serif;
   color: #39393a;
@@ -47,7 +56,6 @@ html, body, .container {
 .block-btn {
   display: table-row;
   vertical-align: bottom;
-  border: 1px solid red;
 }
 
 .btn-lg {
@@ -63,13 +71,14 @@ html, body, .container {
 /**---------------------------------------------------------
  *  Sign up Form &  Login Form
  **--------------------------------------------------------*/
-#sign-up-form, #login-form, #create-project-form {
+#sign-up-form, #login-form, #create-project-form,  #update-project-form, #create-us-form {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); 
+  background-color: rgba(0, 0, 0, 0.2); 
+  z-index: 1000;
 }
 
 form {
@@ -84,6 +93,7 @@ form {
   background-color: white;
 }
 
+
 #login-form form {
   height: 30%;
   min-height: 400px;
@@ -97,14 +107,13 @@ form {
   padding: 5%;
 }
 
-.row {
-  height: 80px;
+.line {
   min-height: 60px;
 }
 
-.row, .form-help {
+.line, .form-help {
   width: 100%;
-  margin: 20px auto;
+  margin: 15px auto;
 }
 
 .form-help {
@@ -112,28 +121,28 @@ form {
   font-size: 18px;
 }
 
-.row > button {
+.line > button {
   background-color: rgb(61, 85, 124);
   min-width: 70px;
   width: 47%;
   height: 50px;
   border-radius: 5px;
 }
-.row > .glyphicon-remove {
+.line > .glyphicon-remove {
   color: red;
 }
 
-.row > .glyphicon-ok {
+.line > .glyphicon-ok {
   color: green;
 }
 
-.row > label {
+.line > label {
   font-style: italic;
 }
 
-input {
+.line > input, .line > select {
   width: 100%;
-  height: 60%;
+  height: 45px;
   padding: 10px;
 }
 
@@ -157,24 +166,39 @@ input {
  *  Project page
  **--------------------------------------------------------*/
 
-table{
-  width: 100%;
+.row {
   clear: both;
 }
 
-td {
-}
-tr, th, td {
-  min-height: 40px;
-  height: 50px;
-  text-align: left;
-  padding-left: 10px;
+.project > h3 {
+  padding: 5px;
+  border-bottom: 5px dashed gray;
 }
 
-.action {
-  text-align: center;
+.project-name, .project-name:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
+.edit-btn, .delete-btn, .see-btn {
+  border: 0;
+  text-decoration: none;
+  color: black;
+  margin: 0 5px;
+}
+
+.edit-btn:hover, .delete-btn:hover, .see-btn:hover {
+  background-color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.action-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 
 .header {
   box-shadow: 2px 3px 3px #888888;
@@ -188,25 +212,25 @@ tr, th, td {
   position: relative;
   font-size: 24px;
   font-family: 'Open Sans', sans-serif;
-  color: #39393a;
+  color: white !important;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 24px;
   font-weight: 24;
   letter-spacing: .3px;
   line-height: 1;
-  text-shadow: #EDEDED 1px 1px 0;
-  padding: 6px;
-  border: 1px solid black;
-  border-radius: 3px 6px;
-  box-shadow: 2px 3px 3px #888888;
+  text-shadow: gray 1px 1px 0 !important;
+  border: 1px solid white;
+  border-radius: 15px 25px;
+  background-color: black;
 }
 
 .logo-min::after {
   content:"scrumizer";
   position: absolute;
-  left: 5px;
-  top: 4px;
+  color: gray !important;
+  left: 10px;
+  top: 13px;
 }
 .logo-min::after {
   background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, #555 25%, #555 50%, transparent 50%, transparent 75%, #555 75%);
@@ -223,59 +247,238 @@ tr, th, td {
   text-decoration: none;
 }
 
-.logout:hover {
+.logout:hover, .logo-min:hover {
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btn-container {
-  width: 100%;
-  background-color: black;
+  margin: 10px 0;
 }
 
 .create-project-btn {
-  margin: 10px 0;
   float: right;
-  background-color: rgb(152, 219, 142);
+  background-color: black;
+  color: white;
   border: 0;
 }
-.create-project-btn::after {
+.create-us-btn {
+  margin: 0;
+  background-color: black;
+  color: white;
+  border: 0;
+}
+.create-project-btn::after, .create-us-btn::after {
   clear: both;
 }
 
-.create-project-btn:hover {
-  background-color: rgb(116, 244, 66);
-}
-
-.edit-btn {
-  background-color: rgb(28, 109, 239);
-  color: white;
-  border: 0;
-}
-
-.edit-btn:hover {
-  background-color: rgb(28, 109, 240);
-  color: white;
-}
-
-.delete-btn {
-  background-color: rgb(249, 37, 48);
-  color: white;
-  border: 0;
-}
-
-.delete-btn:hover {
-  background-color: rgb(250, 37, 48);
+.create-project-btn:hover, .create-us-btn:hover {
+  background-color: black;
   color: white;
 }
 
 textarea {
-  height: 100px;
+  height: 80px;
   width: 100%;
 }
 
-#create-project-form button {
-  position: relative;
-  margin-top: 60px;
+#create-project-form button, #update-project-form button, #create-us-form button {
+  margin-top: 20px;
   width: 49.6%;
   min-width: 200px;
+}
+
+.list-group {
+  background-color: #dcdcdc !important;
+}
+
+/**---------------------------------------------------------
+ *  Us page
+ **--------------------------------------------------------*/
+
+.us span {
+  font-size: 12px;
+}
+
+.delete-us-btn {
+  float: right;
+  color: black;
+  margin: 8px;
+  z-index: 3;
+  cursor: pointer;
+}
+
+.delete-us-btn::after {
+  clear: both;
+}
+
+.issue-detail {
+  border-left: 5px solid #3c3c3d;
+  padding-left: 50px;
+}
+
+.issue-detail  h2 {
+  color: black;
+  padding-bottom: 5px;
+  border-bottom: 5px solid #3c3c3d;
+}
+
+.issue-detail p {
+  color: #515966;
+}
+
+.issue-detail p  {
+  font-size: 18px;
+  color: black;
+}
+
+.issue-detail p  strong {
+  font-size: 18px;
+  color: black;
+}
+
+.issue-detail p  a {
+  color: black;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.edit-us-btn {
+  float: right;
+  color: black;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.edit-us-btn::after {
+  clear: both;
+}
+
+.edit-us-btn:hover {
+  color: black;
+}
+
+
+.add-member input {
+  width: 50%;
+  height: 45px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.add-member button {
+  width: 15%;
+  height: 45px;
+  padding: 10px;
+}
+
+.add-member ul {
+  width: 50%;
+}
+
+.add-member li {
+  cursor: pointer;
+}
+
+
+
+.add-member-btn {
+  float: right;
+  background-color: black;
+  color: white;
+  border: 0;
+}
+
+.member-title {
+  clear: both; 
+  margin-top: 50px; 
+}
+.member-list {
+  clear: both;
+  margin-top: 10px;
+  width: 50%;
+  box-shadow: 1px 2px 3px black;
+}
+
+.member-list .list-group-item {
+  border: 0;
+}
+
+.navbar {
+  background-color: #0B0B0B !important; 
+  border-color: transparent; border-radius: 0%;
+  box-shadow: 0 0 6px 3px rgba(0,0,0,.35); 
+}
+/** Default navbar **/
+.navbar-default .navbar-nav> li > a { 
+  padding-top: 25px; 
+  padding-bottom: 25px; 
+  min-height: 69px; 
+  color: #A4A4A4;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.navbar-default .navbar-nav > li > a:hover {color: white; cursor: pointer;}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: transparent;
+  color: white;
+}
+.navbar-default .navbar-toggle {
+  border-color: transparent;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  border-color: transparent;
+  background-color: transparent;
+}
+.navbar-default .navbar-collapse {
+  border-color: transparent;
+}
+.navbar-default .navbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-right: 50px;
+}
+
+.navbar-right a {
+  text-transform: lowercase !important;
+  letter-spacing: 0em !important;
+}
+
+.row {
+  width: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.member, .project {
+  width: 33%;
+  box-shadow: 1px 1px 3px #888888;
+  margin: 0.166%;
+}
+
+/** Animation **/
+main.ng-enter {
+  transition: 0.5s linear all;
+  opacity: 0;
+}
+
+main.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+#sign-up-form.ng-enter, #login-form.ng-enter, #create-project-form.ng-enter, 
+ #update-project-form.ng-enter, #create-us-form.ng-enter {
+  transition: 0.2s linear all;
+  opacity: 0;
+}
+
+#sign-up-form.ng-enter.ng-enter-active , #login-form.ng-enter.ng-enter-active , 
+#create-project-form.ng-enter.ng-enter-active , #update-project-form.ng-enter.ng-enter-active , 
+#create-us-form.ng-enter.ng-enter-active 
+{
+  opacity: 1;
 }
