@@ -10,7 +10,7 @@ function installModules (modules, callback) {
 
   var module = modules.shift()
 
-  childProcess.exec('npm i -D ' + module, {}, function (error, stdout, stderr) {
+  childProcess.exec('npm i -S ' + module, {}, function (error, stdout, stderr) {
     process.stdout.write(stdout + '\n')
     process.stderr.write(stderr + '\n')
     if (error !== null) {

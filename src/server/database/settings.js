@@ -1,7 +1,7 @@
 exports.dbConfig = {
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'test',
   database: 'scrumdb',
   port: 3306
 }

@@ -1,0 +1,7 @@
+{
+  "name": "Scrumizer app",
+  "description": "Scrum project management tool",
+  "repository": "https://github.com/baldepro/scrumizer",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
