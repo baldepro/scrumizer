@@ -5,10 +5,12 @@ import projectServices from './project/projectService'
 import userSession from './services/userSession'
 import usServices from './us/usService'
 import sprintServices from './sprint/service'
+import taskServices from './task/taskService'
 import teamServices from './team/teamService'
 import projectCtrl from './project/projectCtrl'
 import usCtrl from './us/usCtrl'
 import sprintCtrl from './sprint/sprintCtrl'
+import taskCtrl from './task/taskCtrl'
 import teamCtrl from './team/teamCtrl'
 import directives from './services/directives'
 import uiRouter from 'angular-ui-router'
@@ -20,6 +22,7 @@ const app = angular.module('app', [uiRouter, ngAnimate,
   projectCtrl.name, projectServices.name, directives.name,
   userSession.name, usCtrl.name, usServices.name,
   sprintCtrl.name, sprintServices.name,
+  taskCtrl.name, taskServices.name,
   teamCtrl.name, teamServices.name
 ])
 
@@ -69,8 +72,15 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) =
         })
         .state('sprint', {
           url: '/sprint/:projectId',
-          template: require('./sprint/index.html'),
-          controller: 'sprintCtrl'
+          template: require('./sprint/sprint.html'),
+          controller: 'sprintCtrl',
+          resolve: resolveAccess
+        })
+        .state('task', {
+          url: '/task/:projectId/:sprintId',
+          template: require('./task/task.html'),
+          controller: 'taskCtrl',
+          resolve: resolveAccess
         })
 
   $locationProvider.html5Mode({
