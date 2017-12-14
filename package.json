@@ -2,12 +2,9 @@
   "name": "scrumizer",
   "version": "0.0.0",
   "private": true,
-  "engines": {
-    "node": "8.9.3"
-  },
   "scripts": {
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
-    "start": "webpack "
+    "start": "node server & webpack"
   },
   "dependencies": {
     "angular-animate": "^1.6.7",
