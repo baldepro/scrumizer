@@ -14,7 +14,7 @@ const userSessionService = angular.module('app.userSessionService', [])
     .then(response => {
       if (response.data.success) {
         authToken.setToken(response.data.token)
-        $scope.user.init()
+        $scope.init()
         let path = '/project/' + response.data.info.name
         $location.path(path)
       }

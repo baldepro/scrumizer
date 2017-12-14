@@ -1,91 +1,90 @@
-import _ from 'lodash'
 import angular from 'angular'
 
-var sprintCtrl = angular.module('sprintCtrl', [])
+const sprintCtrlModule = angular.module('app.sprintModule', [])
 
-.controller('sprintCtrl',
-  ['$scope', '$stateParams', '$location', 'createSprintService', 'getSprintService', 'deleteSprintService', 'updateSprintService', 'getUsOfSprintService', 'getTasksOfSprintService',
-    function ($scope, $stateParams, $location, createSprintService, getSprintService, deleteSprintService, updateSprintService, getUsOfSprintService, getTasksOfSprintService) {
-      $scope.sprints = []
-      $scope.tasksOfSprint = []
-      $scope.usOfSprint = []
-      $scope.createUsBtnActivated = false
-      $scope.idProject = $stateParams.project_id
-      $scope.clickCreateUsBtn = function () {
-        $scope.createUsBtnActivated = true
+.controller('sprintCtrl', ['$scope', '$stateParams', 'sprintFactory',
+  function ($scope, $stateParams, sprintFactory) {
+    $scope.sprints = []
+    $scope.projectId = $stateParams.projectId
+    $scope.sprint = {
+      id: '',
+      start_time: '',
+      end_time: ''
+    }
+
+    $scope.sprintUpdate = undefined
+
+    $scope.sprintComparator = {}
+
+    $scope.sprintCreationForm = {
+      show: false,
+      nameFormat: /^([a-z]|[A-Z])[a-zA-Z0-9 ]+$/
+      // gitFormat: /((git|ssh|http(s)?)|(git@[\w\.]+))(:(\/\/)?)([\w\.@\:/\-~]+)(\.git)(\/)?/
+    }
+
+    $scope.showUpdateForm = false
+
+    sprintFactory.get($scope)
+
+    $scope.init = function () {
+      $scope.sprint.id = ''
+      $scope.sprint.start_time = ''
+      $scope.sprint.end_time = ''
+    }
+
+    $scope.openUs = function (sprint) {
+      sprintFactory.openUs(sprint)
+    }
+    $scope.openTasks = function (sprint) {
+      sprintFactory.openTasks(sprint)
+    }
+    $scope.newSprintBtn = function () {
+      $scope.sprintCreationForm.show = true
+    }
+
+    $scope.create = function () {
+      sprintFactory.create($scope)
+    }
+
+    $scope.clickCancelBtn = function () {
+      $scope.sprintCreationForm.show = false
+    }
+
+    $scope.showSprintForm = function (sprint) {
+      $scope.sprintUpdate = sprint
+      $scope.sprintComparator.start_time = sprint.start_time
+      $scope.sprintComparator.end_time = sprint.end_time
+
+      $scope.showUpdateForm = true
+    }
+
+    $scope.update = function () {
+      if ($scope.sprintUpdate.start_time !== undefined && $scope.sprintUpdate.start_time !== $scope.sprintComparator.start_time) {
+        $scope.sprint.start_time = $scope.sprintUpdate.start_time
+      } else {
+        $scope.sprint.start_time = $scope.sprintComparator.start_time
       }
-      $scope.clickCancelBtn = function () {
-        $scope.createUsBtnActivated = false
+      if ($scope.sprintUpdate.end_time !== undefined && $scope.sprintUpdate.end_time !== $scope.sprintComparator.end_time) {
+        $scope.sprint.end_time = $scope.sprintUpdate.end_time
+      } else {
+        $scope.sprint.end_time = $scope.sprintComparator.end_time
       }
 
-      getSprintService($scope)
+      $scope.sprint.id = $scope.sprintUpdate.id
+      sprintFactory.update($scope)
 
-      $scope.sprint = {
-        id: '',
-        start_time: '',
-        end_time: '',
-        project_id: '',
-        init: function () {
-          this.id = ''
-          this.start_time = ' '
-          this.end_time = ' '
-          this.project_id = ' '
-        }
-      }
+      $scope.showUpdateForm = false
+    }
 
-      $scope.create = function () {
-        while ($scope.sprints.length !== 0) {
-          $scope.sprints.splice(0, 1)
-        }
-        createSprintService($scope)
-        getSprintService($scope)
-        $scope.createUsBtnActivated = false
-      }
-      $scope.clickSprint = function () {
-        $location.path('/sprint/' + $stateParams.project_id)
-      }
+    $scope.delete = function (sprintToDelete) {
+      $scope.sprint.id = sprintToDelete.id
+      $scope.sprint.start_time = sprintToDelete.start_time
+      $scope.sprint.end_time = sprintToDelete.end_time
 
-      $scope.clickBacklog = function () {
-        $location.path('/us/' + $stateParams.project_id)
-      }
-      $scope.onEditClick = sprint => {
-        sprint.isEditing = true
-      }
+      sprintFactory.delete($scope)
+    }
+  }
+]
+)
 
-      $scope.onCancelClick = sprint => {
-        sprint.isEditing = false
-      }
-
-      $scope.upadteSprint = sprint => {
-        sprint.isEditing = false
-
-        if (sprint.updatedStart_time !== undefined) sprint.start_time = sprint.updatedStart_time
-        if (sprint.updatedEnd_time !== undefined) sprint.end_time = sprint.updatedEnd_time
-
-        $scope.sprint.id = sprint.id
-        $scope.sprint.start_time = sprint.start_time
-        $scope.sprint.end_time = sprint.end_time
-        $scope.sprint.project_id = sprint.project_id
-
-        updateSprintService($scope)
-      }
-
-      $scope.deleteSprint = sprintToDelete => {
-        $scope.sprint.id = sprintToDelete.id
-        $scope.sprint.start_time = sprintToDelete.start_time
-        $scope.sprint.end_time = sprintToDelete.end_time
-        $scope.sprint.project_id = sprintToDelete.project_id
-
-        deleteSprintService($scope)
-
-        _.remove($scope.sprints, sprint => (
-        sprint.id === sprintToDelete.id &&
-        sprint.start_time === sprintToDelete.start_time &&
-        sprint.end_time === sprintToDelete.end_time &&
-        sprint.project_id === sprintToDelete.project_id
-      )
-        )
-      }
-    }])
-
-export default sprintCtrl
+export default sprintCtrlModule

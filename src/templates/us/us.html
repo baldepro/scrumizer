@@ -1,0 +1,129 @@
+<menu-bar></menu-bar>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-8 issues">
+                <div class="btn-container">
+                        <button type="button" class="btn btn-default create-us-btn" ng-click="newUsBtn()">
+                            <span class="glyphicon glyphicon-plus"></span> New user story
+                        </button>
+                </div>
+                <div class="list-group us" ng-repeat="userStory in userStories">
+                    <a class="glyphicon glyphicon-trash delete-us-btn" ng-click="deleteUs(userStory)"></a>
+                    <a class="list-group-item" ng-click="showDetails(userStory)">
+                        <h3 class="list-group-item-heading">{{userStory.description}}</h3>
+                        <span class="list-group-item-text">#US-{{userStory.id}}</span>
+                        
+                    </a>
+                </div>
+        </div>
+        <div class="col-sm-4 issue-detail">
+            <div ng-if="usDetails.show">
+                <h2>#US-{{usDetails.id}}
+                    <a ng-if="!isEditing" class="glyphicon glyphicon-pencil edit-us-btn" ng-click="editUs()"></a>
+                    <button ng-if="isEditing" type="button" class="btn btn-default btn-sm" ng-click="updateUs(usDetails)">
+                        <span class="glyphicon glyphicon-ok"></span> Save
+                    </button>
+                    <button ng-if="isEditing" type="button" class="btn btn-default btn-sm" ng-click="cancelUpdate()">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </h2>
+                <p ng-if="!isEditing">
+                    <strong>Description :</strong> <br />{{usDetails.description}}
+                </p>
+                <p class="row" ng-if="isEditing">
+                    <strong>Description </strong>
+                    <textarea class="form-control" ng-model="usComparator.description"></textarea>    
+                </p>
+
+                <p ng-if="!isEditing">
+                    <strong>Priority : </strong> {{usDetails.priority}}
+                </p>
+                <p class="row" ng-if="isEditing">
+                    <strong>Priority</strong>
+                    <select class="form-control" ng-model="usComparator.priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </p>
+                
+                <p ng-if="!isEditing">
+                    <strong>Points : </strong>{{usDetails.points}}
+                </p>
+                <p class="row" ng-if="isEditing">
+                    <strong>Points </strong>
+                    <select class="form-control" ng-model="usComparator.points">        
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="12">12</option>
+                    </select>
+                </p>
+                <p ng-if="!isEditing">
+                    <strong> Status : </strong> {{usDetails.status}}
+                </p>
+
+                <p class="row" ng-if="isEditing">
+                    <strong> Status </strong> 
+                    <select class="form-control" ng-model="usComparator.status">
+                        <option value="todo">To Do</option>
+                        <option value="work_in_progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="usCreationForm.show" id="create-us-form" ng-click="closeForm($event)">
+            <form name="createUsForm" ng-submit="create()" novalidate>
+                <div class="content">
+                    <div class="line" >
+                        <label>Description</label> <br />
+                        <textarea name="description" class="description" type="text" placeholder="Enter project description"
+                                ng-pattern="usCreationForm.descriptionFormat" ng-model="us.description"
+                                ng-class="{'has-error': !createUsForm.description.$pristine && createUsForm.description.$invalid, 
+                                        'has-success': !createUsForm.description.$pristine && createUsForm.description.$valid}"  required>
+                        </textarea>
+                    </div>
+                    
+                    <div class="line">
+                         <label>Priotiry</label> <br />
+                         <select  class="form-control" ng-model="us.priority">
+                             <option value="low" selected>Low</option>
+                             <option value="medium">Medium</option>
+                             <option value="high">High</option>
+                         </select>
+                    </div>
+                        
+                    <div class="line">
+                        <label>Points</label> <br />
+                        <select  class="form-control" ng-model="us.points">
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="12">12</option>
+                        </select>
+                    </div>
+
+                    <div class="line">
+                            <label>Status</label> <br />
+                            <select class="form-control" ng-model="us.status">
+                                <option value="todo" selected>To Do</option>
+                                <option value="work_in_progress">In Progress</option>
+                                <option value="done">Done</option>
+                            </select>
+                       </div>
+                    
+                    <div class="line">
+                        <button class="btn btn-primary submit-btn" ng-disabled="createUsForm.description.$invalid">Create</button>
+                        <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div> 
+        
+</div>

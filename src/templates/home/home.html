@@ -10,35 +10,35 @@
     <div ng-if="signupForm.show" id="sign-up-form" ng-click="closeForm($event)">
         <form name="signup" ng-submit="submitSignUpData()" novalidate>
             <div class="content">
-                <div class="row" ng-class="{'has-error': !signup.username.$pristine && signup.username.$invalid, 
+                <div class="line" ng-class="{'has-error': !signup.username.$pristine && signup.username.$invalid, 
                                             'has-success': !signup.username.$pristine && signup.username.$valid}" >
                     <label>Username</label> <br />
                     <input name="username" class="name" type="text" placeholder="Enter username" ng-model="user.name" 
                             ng-pattern="signupForm.nameFormat" required>
                 </div> 
                 
-                <div class="row" ng-class="{'has-error': !signup.email.$pristine && signup.email.$invalid, 
+                <div class="line" ng-class="{'has-error': !signup.email.$pristine && signup.email.$invalid, 
                                             'has-success': !signup.email.$pristine && signup.email.$valid}">
                     <label>Email</label> <br />
                     <input name="email" class="email" type="email" placeholder="Enter Email" 
                             ng-model="user.email" ng-pattern="signupForm.mailFormat" required>
                 </div>
 
-                <div class="row" ng-class="{'has-error': !signup.pwd.$pristine && signup.pwd.$invalid, 
+                <div class="line" ng-class="{'has-error': !signup.pwd.$pristine && signup.pwd.$invalid, 
                                             'has-success': !signup.pwd.$pristine && signup.pwd.$valid}">
                     <label>Password (The password should contain between {{signupForm.minLength}} and {{signupForm.maxLength}} caracteres)</label> <br />
                     <input name="pwd" class="password" type="password" placeholder="Enter Password " ng-model="user.password" 
                             ng-minlength="signupForm.minLength" ng-maxlength="signupForm.maxLength"  required>
                 </div>
 
-                <div class="row"  ng-class="{'has-error': !signup.pwdBis.$pristine && (signup.pwdBis.$invalid || !passwordsMatched), 
+                <div class="line"  ng-class="{'has-error': !signup.pwdBis.$pristine && (signup.pwdBis.$invalid || !passwordsMatched), 
                                             'has-success': !signup.pwdBis.$pristine && signup.pwdBis.$valid && passwordsMatched}">
                     <label for="passwordBis">Confirm password</label> <br />
                     <input name="pwdBis"  class="password-repeat" type="password" placeholder="Repeat Password" ng-model="user.passwordBis" 
                             ng-minlength="signupForm.minLength" ng-maxlength="signupForm.maxLength" verify-password="{{[user.password]}}" required>
                 </div>
 
-                <div class="row">
+                <div class="line">
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                     <button class="btn btn-primary submit-btn" 
                             ng-disabled="signup.username.$invalid || signup.email.$invalid || signup.pwd.$invalid || signup.pwdBis.$invalid || !passwordsMatched">Submit</button>
@@ -52,17 +52,17 @@
         <form name="login" ng-submit="submitLoginData()" novalidate>
             <div class="content">
                 <p class="form-help" ng-if="showLoginMsgError">The Username or the password are not valid</p>
-                <div class="row">
+                <div class="line">
                     <label for="username">Username</label> <br />
                     <input name="username" class="name" type="text" placeholder="Enter username" ng-model="user.name" required>
                 </div>
                 
-                <div class="row">
+                <div class="line">
                     <label>Password</label> <br />
                     <input name="pwd" class="password" type="password" placeholder="Enter Password" ng-model="user.password" required>
                 </div>
                 
-                <div class="row">
+                <div class="line">
                     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
                     <button class="btn btn-primary submit-btn" ng-disabled="login.$invalid">Submit</button>
                     <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>

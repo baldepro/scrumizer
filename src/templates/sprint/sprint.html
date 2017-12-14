@@ -1,0 +1,72 @@
+<menu-bar></menu-bar>
+<div class="container-fluid">
+    <div class="btn-container">
+        <button type="button" class="btn btn-default create-project-btn" ng-click="newSprintBtn()">
+            <span class="glyphicon glyphicon-plus"></span> New sprint
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4 project" ng-repeat="(index, sprint) in sprints">
+            <h3><a class="project-name">Sprint #{{index+1}}</a></h3>
+            <p><h4><a href="" ng-click="openUs(sprint)">user stories</a></h4></p>
+            <p><h4><a href="" ng-click="openTasks(sprint)">tasks</a></h4></p>
+            <p><h4>Date de début :</h4> <a href="#">{{sprint.start_time}}</a></p>
+            <p><h4>Date de fin :  </h4>{{sprint.end_time}}</p>
+            <p>
+                <div class="action-btn">
+                    <a class="glyphicon glyphicon-eye-open see-btn" ng-click="showSprintForm(sprint)"></a>
+                    <a class="glyphicon glyphicon-pencil edit-btn" ng-click="showSprintForm(sprint)"></a>
+                    <a class="glyphicon glyphicon-trash delete-btn" ng-click="delete(sprint)"></a>
+                </div>
+            </p>
+        </div>
+    </div>
+</div>
+<div ng-if="sprintCreationForm.show" id="create-project-form" >
+    <form name="createSprintForm" novalidate>
+        <div class="content">
+            <div class="line" ng-class="{'has-error': !createSprintForm.start_time.$pristine && createSprintForm.start_time.$invalid,
+                                            'has-success': !createSprintForm.start_time.$pristine && createSprintForm.start_time.$valid}" >
+                <label>Date de début</label>
+                <input name="name" class="name" type="date" placeholder="Enter Start date" ng-model="sprint.start_time"
+                                ng-pattern="" required>
+            </div>
+
+            <div class="line" ng-class="{'has-error': !createSprintForm.end_time.$pristine && createSprintForm.end_time.$invalid,
+                    'has-success': !createSprintForm.end_time.$pristine && createSprint.end_time.$valid}">
+                 <label>Date de fin</label>
+                 <input name="git" class="git" type="date" placeholder="Enter End date" ng-model="sprint.end_time" required>
+            </div>
+
+            <div class="line">
+                <button class="btn btn-primary submit-btn" ng-disabled="" ng-click ="create()">Create</button>
+                <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div ng-if="showUpdateForm" id="update-project-form" >
+        <form name="updateSprintForm" novalidate>
+            <div class="content">
+                <div class="line" ng-class="{'has-error': !updateSprintForm.start_time.$pristine && updateSprintForm.start_time.$invalid,
+                                            'has-success': !updateSprintForm.start_time.$pristine && updateSprintForm.start_time.$valid}" >
+                    <label>Date de début</label> <br />
+                    <input name="name" class="name" type="text" placeholder="Enter Start date" ng-model="sprintUpdate.start_time"
+                                ng-pattern="" required>
+                </div>
+
+                <div class="line" ng-class="{'has-error': !updateSprintForm.end_time.$pristine && updateSprintForm.end_time.$invalid,
+                    'has-success': !updateSprintForm.end_time.$pristine && updateSprintForm.end_time.$valid}">
+                    <label>Date de fin</label> <br />
+                    <input name="git" class="git" type="text" placeholder="Enter End time" ng-model="sprintUpdate.end_time" required>
+                </div>
+
+                <div class="line">
+                    <button class="btn btn-primary submit-btn" ng-click="update()"
+                            ng-disabled="">Save</button>
+                    <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>

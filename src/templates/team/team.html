@@ -1,0 +1,29 @@
+<menu-bar></menu-bar>
+<div class="container-fluid">
+    <button type="button" class="btn btn-default add-member-btn" ng-click="newMemberBtn()" ng-if="!addMember">
+      <span class="glyphicon glyphicon-plus"></span> New Member
+    </button>
+    <div class="col add-member" ng-if="addMember">
+      <input name="user" type="text" ng-model="user.name" ng-keyup="complete(user.name)" class="form-control">
+      <button class="btn btn-primary submit-btn" ng-disabled="!activateBtn" ng-click="addNewMember(user.name)">Add</button><br />
+      <ul class="list-group" ng-model="hideThis" ng-hide="hideThis">
+        <li class="list-group-item" ng-repeat="userData in filterUser" ng-click="fillTextbox(userData)">{{userData}}</li>
+      </ul>
+    </div>
+
+    <h2 class="member-title">Members</h2>
+
+    <div class="row">
+        <div class="col-sm-3 member" ng-repeat="member in members">
+            <h3>{{member}}</h3>
+            <p> <h4>Role :</h4></p>
+            <p>
+                <div class="action-btn">
+                    <a class="glyphicon glyphicon-pencil edit-btn" ng-click="EditMember(member)"></a>
+                    <a class="glyphicon glyphicon-trash delete-btn" ng-click="deleteMember(member)"></a>
+                </div>
+            </p>
+        </div>
+    </div>
+
+</div>

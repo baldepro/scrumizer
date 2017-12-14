@@ -1,12 +1,37 @@
 import angular from 'angular'
 import homeModule from './home/homeCtrl'
-import homeServices from './home/homeFactory'
+import homeServices from './home/homeService'
 import projectServices from './project/projectService'
 import userSession from './services/userSession'
+import usServices from './us/usService'
+import sprintServices from './sprint/service'
+import taskServices from './task/taskService'
+import teamServices from './team/teamService'
 import projectCtrl from './project/projectCtrl'
+import usCtrl from './us/usCtrl'
+import sprintCtrl from './sprint/sprintCtrl'
+import taskCtrl from './task/taskCtrl'
+import teamCtrl from './team/teamCtrl'
+import directives from './services/directives'
 import uiRouter from 'angular-ui-router'
+import jwt from 'jsonwebtoken'
+import ngAnimate from 'angular-animate'
 
-const app = angular.module('app', [uiRouter, homeModule.name, homeServices.name, projectCtrl.name, projectServices.name, userSession.name])
+const app = angular.module('app', [uiRouter, ngAnimate,
+  homeModule.name, homeServices.name,
+  projectCtrl.name, projectServices.name, directives.name,
+  userSession.name, usCtrl.name, usServices.name,
+  sprintCtrl.name, sprintServices.name,
+  taskCtrl.name, taskServices.name,
+  teamCtrl.name, teamServices.name
+])
+
+const resolveAccess = ['$stateParams', '$location', 'loginService',
+  function ($stateParams, $location, loginService) {
+    if (!loginService.isLoggedIn() || $stateParams.projectId === undefined) {
+      $location.path('/')
+    }
+  }]
 
 app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) => {
   $qProvider.errorOnUnhandledRejections(false)
@@ -21,21 +46,41 @@ app.config(($stateProvider, $urlRouterProvider, $locationProvider, $qProvider) =
           url: '/project/:name',
           template: require('./project/project.html'),
           controller: 'projectCtrl',
-          resolve: ['$stateParams', '$location', 'loginService', function ($stateParams, $location, loginService) {
-            if (!loginService.isLoggedIn() && $stateParams.name !== undefined) {
-              $location.path('/')
-            }
-          }]
+          resolve: ['$stateParams', '$location', 'loginService', 'authToken',
+            function ($stateParams, $location, loginService, authToken) {
+              let decoded = jwt.decode(authToken.getToken(), {complete: true})
+
+              if (!loginService.isLoggedIn()) {
+                $location.path('/')
+              } else if (decoded.payload.name !== $stateParams.name || $stateParams.name === undefined) {
+                $stateParams.name = decoded.payload.name
+                $location.path('/project/' + $stateParams.name)
+              }
+            }]
         })
         .state('us', {
-          url: '/us/:project_id',
-          template: require('./us/index.html'),
-          controller: 'usCtrl'
+          url: '/us/:projectId',
+          template: require('./us/us.html'),
+          controller: 'usCtrl',
+          resolve: resolveAccess
+        })
+        .state('team', {
+          url: '/team/:projectId',
+          template: require('./team/team.html'),
+          controller: 'teamCtrl',
+          resolve: resolveAccess
         })
         .state('sprint', {
-          url: '/sprint/:project_id',
-          template: require('./sprint/index.html'),
-          controller: 'sprintCtrl'
+          url: '/sprint/:projectId',
+          template: require('./sprint/sprint.html'),
+          controller: 'sprintCtrl',
+          resolve: resolveAccess
+        })
+        .state('task', {
+          url: '/task/:projectId/:sprintId',
+          template: require('./task/task.html'),
+          controller: 'taskCtrl',
+          resolve: resolveAccess
         })
 
   $locationProvider.html5Mode({
