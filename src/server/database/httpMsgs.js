@@ -38,7 +38,7 @@ exports.send504 = function (response, error) {
 }
 
 exports.send200 = function (response) {
-  response.writeHead(STATUS_200, {'Content-Type': 'application/json'})
+  //response.writeHead(STATUS_200, {'Content-Type': 'application/json'})
   response.write(JSON.stringify({success: true, message: 'Resquest successfuly executed'}))
   response.end()
 }

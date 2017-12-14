@@ -14,9 +14,10 @@ exports.get = function (request, response, body) {
 }
 
 exports.add = function (request, response, body) {
-  if (!body.start && !body.end && !body.projectId) throw new Error('Input Not Valid')
+  if (!body.start_time && !body.end_time && !body.projectId) throw new Error('Input Not Valid')
   connection.query(dbQuery.sprint.add(body), (error, results, fields) => {
     if (error) throw new Error('Request Not Valid')
+    httpMsgs.sendData(response, results)
   })
 }
 

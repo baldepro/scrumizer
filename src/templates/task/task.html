@@ -1,0 +1,99 @@
+<menu-bar></menu-bar>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-8 issues">
+                <div class="btn-container">
+                        <button type="button" class="btn btn-default create-us-btn" ng-click="newTaskBtn()">
+                            <span class="glyphicon glyphicon-plus"></span> New task
+                        </button>
+                </div>
+                <div class="list-group us" ng-repeat="(index,task) in tasks">
+                    <a class="glyphicon glyphicon-trash delete-us-btn" ng-click="deleteTask(task)"></a>
+                    <a class="list-group-item" ng-click="showDetails(task)">
+                        <h3 class="list-group-item-heading">{{task.description}}</h3>
+                        <span class="list-group-item-text">#Task-{{index+1}}</span>
+                    </a>
+                </div>
+        </div>
+        <div class="col-sm-4 issue-detail">
+            <div ng-if="taskDetails.show">
+                <h2>#Task-{{taskDetails.id}}
+                    <a ng-if="!isEditing" class="glyphicon glyphicon-pencil edit-us-btn" ng-click="editTask()"></a>
+                    <button ng-if="isEditing" type="button" class="btn btn-default btn-sm" ng-click="updateTask(taskDetails)">
+                        <span class="glyphicon glyphicon-ok"></span> Save
+                    </button>
+                    <button ng-if="isEditing" type="button" class="btn btn-default btn-sm" ng-click="cancelUpdate()">
+                        <span class="glyphicon glyphicon-remove"></span> Cancel
+                    </button>
+                </h2>
+                <p ng-if="!isEditing">
+                    <strong>Description :</strong> <br />{{taskDetails.description}}
+                </p>
+                <p class="row" ng-if="isEditing">
+                    <strong>Description </strong>
+                    <textarea class="form-control" ng-model="taskComparator.description"></textarea>
+                </p>
+
+                <p ng-if="!isEditing">
+                    <strong> Status : </strong> {{taskDetails.status}}
+                </p>
+
+                <p class="row" ng-if="isEditing">
+                    <strong> Status </strong>
+                    <select class="form-control" ng-model="taskComparator.status">
+                        <option value="todo">To Do</option>
+                        <option value="work_in_progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </p>
+
+                <p ng-if="!isEditing">
+                    <strong>Developper : </strong>{{taskDetails.developerId}}
+                </p>
+                <p class="row" ng-if="isEditing">
+                    <strong>Developper </strong>
+                    <select class="form-control" ng-model="taskComparator.developerId">
+                        <option ng-repeat="(index,member) in members" value="{{member}}" selected>{{member}}</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="taskCreationForm.show" id="create-us-form" ng-click="closeForm($event)">
+            <form name="createTaskForm" ng-submit="create()" novalidate>
+                <div class="content">
+                    <div class="line" >
+                        <label>Description</label> <br />
+                        <textarea name="description" class="description" type="text" placeholder="Enter task description"
+                                ng-pattern="taskCreationForm.descriptionFormat" ng-model="task.description"
+                                ng-class="{'has-error': !createTaskForm.description.$pristine && createTaskForm.description.$invalid,
+                                        'has-success': !createTaskForm.description.$pristine && createTaskForm.description.$valid}"  required>
+                        </textarea>
+                    </div>
+
+                    <div class="line">
+                        <label>Status</label> <br />
+                        <select class="form-control" ng-model="task.status">
+                            <option value="todo" selected>To Do</option>
+                            <option value="work_in_progress">In Progress</option>
+                            <option value="done">Done</option>
+                        </select>
+                    </div>
+                    <div class="line">
+                        <label>Developper</label> <br />
+                        <select  class="form-control" ng-model="task.developerId">
+                            <option ng-repeat="(index,member) in members" value="{{member}}" selected>{{member}}</option>
+                        </select>
+                    </div>
+
+                    <div class="line">
+                        <button class="btn btn-primary submit-btn" ng-disabled="createTaskForm.description.$invalid">Create</button>
+                        <button class="btn btn-primary cancel-btn" ng-click="clickCancelBtn()">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+</div>
