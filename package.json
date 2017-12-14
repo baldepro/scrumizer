@@ -6,7 +6,7 @@
     "node": "8.9.3"
   },
   "scripts": {
-    "start": "webpack "
+    "start": "webpack ",
     "install": "node install_modules",
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
     "prod": "webpack "
