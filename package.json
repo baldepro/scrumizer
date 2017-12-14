@@ -1,6 +1,9 @@
 {
   "name": "scrumizer",
   "version": "0.0.0",
+  "engines": {
+    "node": "6.11.4"
+  },
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
