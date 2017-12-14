@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NODE_ENV=dev node server & webpack-dev-server",
-    "start": "node server & webpack"
+    "start": "webpack & node server"
   },
   "dependencies": {
     "angular-animate": "^1.6.7",
